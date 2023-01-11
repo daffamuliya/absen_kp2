@@ -10,8 +10,8 @@ if (!isset($_SESSION["login"])) {
 
 // $mahasiswa = query("SELECT * FROM tb_mahasiswa");
 
-$mahasiswa = query("SELECT tb_mahasiswa.nama, tb_mahasiswa.nobp,tb_mahasiswa.email,tb_mahasiswa.universitas,tb_mahasiswa.jurusan,tb_mahasiswa.id_bidang,tb_mahasiswa.id_subbidang,
-tb_mahasiswa.tanggalmasuk,tb_mahasiswa.tanggalkeluar,tb_mahasiswa.lamapkl FROM tb_mahasiswa LEFT JOIN user on user.username = tb_mahasiswa.nobp where user.username IS NULL")
+$mahasiswa = query("SELECT tb_bidang.nama_bidang, tb_mahasiswa.nama, tb_mahasiswa.nobp,tb_mahasiswa.email,tb_mahasiswa.universitas,tb_mahasiswa.jurusan,tb_mahasiswa.id_bidang,tb_mahasiswa.id_subbidang,
+tb_mahasiswa.tanggalmasuk,tb_mahasiswa.tanggalkeluar,tb_mahasiswa.lamapkl FROM tb_mahasiswa JOIN tb_bidang on tb_bidang.id_bidang = tb_mahasiswa.id_bidang LEFT JOIN user on user.username = tb_mahasiswa.nobp where user.username IS NULL")
 
 ?>
 
@@ -282,14 +282,15 @@ tb_mahasiswa.tanggalmasuk,tb_mahasiswa.tanggalkeluar,tb_mahasiswa.lamapkl FROM t
                                 </tr>
                               </thead>
                               <tbody>
-                              <?php foreach ($mahasiswa as $row) : ?>
+                              <?php foreach ($mahasiswa as $row) :
+                                ?>
                                 <tr>
                                   <td><?= $row["nama"] ?></th>
                                   <td><?= $row["nobp"] ?></td>
                                   <td><?= $row["email"] ?></td>
                                   <td><?= $row["jurusan"] ?></td>
                                   <td><?= $row["universitas"] ?></td>
-                                  <td><?= $row["id_bidang"] ?></td>
+                                  <td><?= $row["nama_bidang"] ?></td>
                                   <td><?= $row["id_subbidang"] ?></td>
                                   <td><?= $row["lamapkl"] ?></td> 
                                   <td><a class="btn btn-warning" role="button" href="verifikasi.php?id=<?= $row["nobp"] ?>" onclick="return confirm('Apakah yakin verifikasi data?');">Verifikasi</a></td>

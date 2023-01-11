@@ -79,21 +79,18 @@ $sub_bidang = query("SELECT * FROM tb_subbidang");
             </div>
             <div class="wrap-input100 validate-input m-b-26 " data-validate="Username is required">
               <span class="label-input100"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-diagram-3" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1zM0 11.5A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/></svg> </span>
-              <select class="input100 border-0" aria-label="" name="id_bidang" style="color:grey">
+              <select class="input100 border-0" aria-label="" name="id_bidang" style="color:grey; margin-top:15px;" id="id_bidang">
                     <option selected>Bidang</option>
                     <?php foreach ($bidang as $row) : ?>
-                    <option value="<?php echo $row['nama_bidang'];?>"><?php echo $row['nama_bidang'];?></option>
+                    <option value="<?php echo $row['id_bidang'];?>"><?php echo $row['nama_bidang'];?></option>
                     <?php endforeach; ?>
               </select>
               <span class="focus-input100"></span>
             </div>
             <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
               <span class="label-input100"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-command" viewBox="0 0 16 16"><path d="M3.5 2A1.5 1.5 0 0 1 5 3.5V5H3.5a1.5 1.5 0 1 1 0-3zM6 5V3.5A2.5 2.5 0 1 0 3.5 6H5v4H3.5A2.5 2.5 0 1 0 6 12.5V11h4v1.5a2.5 2.5 0 1 0 2.5-2.5H11V6h1.5A2.5 2.5 0 1 0 10 3.5V5H6zm4 1v4H6V6h4zm1-1V3.5A1.5 1.5 0 1 1 12.5 5H11zm0 6h1.5a1.5 1.5 0 1 1-1.5 1.5V11zm-6 0v1.5A1.5 1.5 0 1 1 3.5 11H5z"/></svg> </span>
-              <select class="input100 border-0" aria-label="" name="id_subbidang" style="color:grey; margin-top:10px;">
-                    <option selected>Sub Bidang</option>
-                    <?php foreach ($sub_bidang as $row) : ?>
-                    <option value="<?php echo $row['nama_subbidang'];?>"><?php echo $row['nama_subbidang'];?></option>
-                    <?php endforeach; ?>
+              <select class="input100 border-0" placeholder="Sub Bidang" aria-label="" name="id_subbidang" style="color:grey; margin-top:15px; " id="id_subbidang">
+                  <!-- Disini sob -->
               </select>
               <span class="focus-input100"></span>
             </div>
@@ -112,10 +109,10 @@ $sub_bidang = query("SELECT * FROM tb_subbidang");
               <input class="input100" type="text" name="tanggalkeluar" placeholder="Tanggal Keluar" />
               <span class="focus-input100"></span>
             </div>
-            <div class="wrap-input100 validate-input m-b-26 border-0" >
+            <div class="wrap-input100 validate-input m-b-26 " >
             <label for="formFile" class="form-label" style="color:grey">Surat Pernyataan</label>
               <span class="label-input100"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-check" viewBox="0 0 16 16"><path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2Zm3.708 6.208L1 11.105V5.383l4.708 2.825ZM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2Z"/><path d="M16 12.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Zm-1.993-1.679a.5.5 0 0 0-.686.172l-1.17 1.95-.547-.547a.5.5 0 0 0-.708.708l.774.773a.75.75 0 0 0 1.174-.144l1.335-2.226a.5.5 0 0 0-.172-.686Z"/></svg></span>
-              <input class="form-control" type="file" name="surat_pernyataan" placeholder="Surat Pernyataan" />
+              <input class="form-control border-0" type="file" name="surat_pernyataan" placeholder="Surat Pernyataan" />
               <span class="focus-input100"></span>
             </div>
 
@@ -151,6 +148,28 @@ $sub_bidang = query("SELECT * FROM tb_subbidang");
     <script src="vendor/daterangepicker/daterangepicker.js"></script>
     <script src="vendor/countdowntime/countdowntime.js"></script>
     <script src="js/main.js"></script>
-    
+    <script src="js/jquery-3.4.1.min.js"></script>
+
+    <script>
+
+$("#id_bidang").change(function(){
+    // variabel dari nilai combo box kendaraan
+    var id_bidang = $("#id_bidang").val();
+    //console.log(id_bidang);
+    // Menggunakan ajax untuk mengirim dan dan menerima data dari server
+    $.ajax({
+        type: "POST",
+        dataType: 'html',
+        url: "combobox.php",
+        data: {id_bidang:id_bidang},
+        success: function(data){
+           $("#id_subbidang").html(data);
+        }
+    });
+});
+
+
+    </script>
+
   </body>
 </html>
