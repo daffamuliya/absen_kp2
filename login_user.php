@@ -1,12 +1,12 @@
 <?php
 session_start();
 
+require 'conn.php';
 
 if (isset($_SESSION["login"])) {
-  header("Location: datauser.php");
+  header("Location: login_user.php");
 }
 
-require 'conn.php';
 
 if (isset($_POST["login"])) {
 

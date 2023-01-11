@@ -3,7 +3,6 @@
 
 require 'conn.php';
 
-
 if(isset ($_POST["register"])) {
   
   if (tambah($_POST) > 0) {
@@ -14,6 +13,10 @@ if(isset ($_POST["register"])) {
   
 
 }
+
+$bidang = query("SELECT * FROM tb_bidang");
+$sub_bidang = query("SELECT * FROM tb_subbidang");
+
 
 
 ?>
@@ -74,14 +77,24 @@ if(isset ($_POST["register"])) {
               <input class="input100" type="text" name="universitas" placeholder="Universitas" />
               <span class="focus-input100"></span>
             </div>
-            <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+            <div class="wrap-input100 validate-input m-b-26 " data-validate="Username is required">
               <span class="label-input100"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-diagram-3" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H14a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 2 7h5.5V6A1.5 1.5 0 0 1 6 4.5v-1zM8.5 5a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1zM0 11.5A1.5 1.5 0 0 1 1.5 10h1A1.5 1.5 0 0 1 4 11.5v1A1.5 1.5 0 0 1 2.5 14h-1A1.5 1.5 0 0 1 0 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5A1.5 1.5 0 0 1 7.5 10h1a1.5 1.5 0 0 1 1.5 1.5v1A1.5 1.5 0 0 1 8.5 14h-1A1.5 1.5 0 0 1 6 12.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1zm4.5.5a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1a1.5 1.5 0 0 1-1.5-1.5v-1zm1.5-.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1z"/></svg> </span>
-              <input class="input100" type="text" name="id_bidang" placeholder="Bidang" />
+              <select class="input100 border-0" aria-label="" name="id_bidang" style="color:grey">
+                    <option selected>Bidang</option>
+                    <?php foreach ($bidang as $row) : ?>
+                    <option value="<?php echo $row['nama_bidang'];?>"><?php echo $row['nama_bidang'];?></option>
+                    <?php endforeach; ?>
+              </select>
               <span class="focus-input100"></span>
             </div>
             <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
               <span class="label-input100"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-command" viewBox="0 0 16 16"><path d="M3.5 2A1.5 1.5 0 0 1 5 3.5V5H3.5a1.5 1.5 0 1 1 0-3zM6 5V3.5A2.5 2.5 0 1 0 3.5 6H5v4H3.5A2.5 2.5 0 1 0 6 12.5V11h4v1.5a2.5 2.5 0 1 0 2.5-2.5H11V6h1.5A2.5 2.5 0 1 0 10 3.5V5H6zm4 1v4H6V6h4zm1-1V3.5A1.5 1.5 0 1 1 12.5 5H11zm0 6h1.5a1.5 1.5 0 1 1-1.5 1.5V11zm-6 0v1.5A1.5 1.5 0 1 1 3.5 11H5z"/></svg> </span>
-              <input class="input100" type="text" name="id_subbidang" placeholder="Sub Bidang" />
+              <select class="input100 border-0" aria-label="" name="id_subbidang" style="color:grey; margin-top:10px;">
+                    <option selected>Sub Bidang</option>
+                    <?php foreach ($sub_bidang as $row) : ?>
+                    <option value="<?php echo $row['nama_subbidang'];?>"><?php echo $row['nama_subbidang'];?></option>
+                    <?php endforeach; ?>
+              </select>
               <span class="focus-input100"></span>
             </div>
             <div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
@@ -138,5 +151,6 @@ if(isset ($_POST["register"])) {
     <script src="vendor/daterangepicker/daterangepicker.js"></script>
     <script src="vendor/countdowntime/countdowntime.js"></script>
     <script src="js/main.js"></script>
+    
   </body>
 </html>

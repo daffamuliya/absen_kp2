@@ -9,7 +9,7 @@ if (!isset($_SESSION["login"])) {
 }
 
 
-$mahasiswa = query("SELECT * FROM user")
+$mahasiswa = query("SELECT * FROM user where level = 'Mahasiswa' ")
 
 ?>
 
@@ -270,7 +270,6 @@ $mahasiswa = query("SELECT * FROM user")
                                 <tr>
                                   <th scope="col">Nama</th>
                                   <th scope="col">Username Login</th>
-                                  <th scope="col">Password Login</th>
                                   <th scope="col">Level</th>
                                   <th scope="col">Aksi</th>
                                 </tr>
@@ -280,7 +279,6 @@ $mahasiswa = query("SELECT * FROM user")
                                 <tr>
                                   <td><?= $row["nama"] ?></th>
                                   <td><?= $row["username"] ?></td>
-                                  <td><?= $row["password"] ?></td>
                                   <td><?= $row["level"] ?></td>
                                   <td><a class="btn btn-danger" role="button" href="hapus.php?id=<?= $row["id"] ?>" onclick="return confirm('Apakah yakin menghapus data?');">Hapus</a></td> 
                                 </tr>

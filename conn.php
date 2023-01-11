@@ -14,17 +14,6 @@ function query ($query) {
 function registrasi ($data) {
 
     global $conn;
-    // $result = mysqli_query($conn, "SELECT * FROM tb_mahasiswa");
-    // $rows = [];
-    // while($row = mysqli_fetch_assoc($result)) {
-    //     $rows[] = $row;
-    // }
-    // return $rows;
-    // $nobp = $rows["nobp"];
-    // $password = "123";
-    // $level = "Mahasiswa";
-
-
     $password = mysqli_real_escape_string($conn, $data["password"]);
     $password = password_hash($password,PASSWORD_DEFAULT);
 
@@ -54,8 +43,6 @@ function tambah ($data) {
     $tanggalmasuk = ($data["tanggalmasuk"]);
     $tanggalkeluar = ($data["tanggalmasuk"]);
     $lamapkl = ($data["lamapkl"]);
-
-
    
     $query = "INSERT INTO tb_mahasiswa VALUES ('$nobp','$nama','$email','$surat_pernyataan', '$universitas','$jurusan','$id_bidang','$id_subbidang','$tanggalmasuk','$tanggalkeluar','$lamapkl')";
 
@@ -111,3 +98,5 @@ function hapus($id) {
     mysqli_query($conn, "DELETE FROM user WHERE id =$id");
     return mysqli_affected_rows($conn);
 }
+
+
