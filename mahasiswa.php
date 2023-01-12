@@ -172,7 +172,7 @@ if (!isset($_SESSION["login"])) {
                                 <div id="submenu-4" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/form-elements.html">Daftar Hadir</a>
+                                            <a class="nav-link" href="absen_hadir.php">Daftar Hadir</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="pages/form-elements.html">Daftar Tidak Hadir</a>

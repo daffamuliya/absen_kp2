@@ -10,10 +10,15 @@ if (!isset($_SESSION["login"])) {
   $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$_SESSION[username]'");
   $row    = mysqli_fetch_assoc($result);
 
-  $results = mysqli_query($conn, "SELECT * FROM tb_kehadiran'");
+  $results = mysqli_query($conn, "SELECT * FROM tb_kehadiran ");
   $rows    = mysqli_fetch_assoc($results);
 
-
+  if($rows){
+    $dataPresensi = ['jam_masuk'=>$rows['jam_masuk'], 'jam_keluar'=>$rows['jam_keluar'], 'tanggal'=>$rows['tanggal'],'status'=>$rows['status']];
+  }else{
+    $dataPresensi = ['jam_masuk'=>"00:00:00", 'jam_keluar'=>"00:00:00", 'status'=>""];  
+  }
+ 
 
 ?>
 
@@ -26,6 +31,7 @@ if (!isset($_SESSION["login"])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
+
     <link rel="icon" type="image/png" href="img/pln.png" />
     <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
     <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
@@ -165,8 +171,16 @@ if (!isset($_SESSION["login"])) {
                                 Menu
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="admin.php" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
-                             
+                                <a class="nav-link " href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
+                                <div id="submenu-1" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                       
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="mahasiswa.php">Dashboard</a>
+                                        </li>
+                                    
+                                    </ul>
+                                </div>
                             </li>
                     
                          
@@ -175,7 +189,7 @@ if (!isset($_SESSION["login"])) {
                                 <div id="submenu-4" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/form-elements.html">Daftar Hadir</a>
+                                            <a class="nav-link" href="absen_hadir.php">Daftar Hadir</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="pages/form-elements.html">Daftar Tidak Hadir</a>
@@ -216,7 +230,7 @@ if (!isset($_SESSION["login"])) {
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h2 class="pageheader-title">Halo <?php echo $row['nama']; ?>, Selamat Datang! </h2>
+                                <h2 class="pageheader-title">Halo <?php echo $row['nama']; ?>, Silahkan Isi Presensi! </h2>
                                 <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
@@ -236,33 +250,39 @@ if (!isset($_SESSION["login"])) {
                         <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
+                                       <div class="col-xl-12 text-center">
+                                           <h2>Rabu, 2022/01/12</h2>
+                                           <a class="btn btn-warning " role="button" id="btnCheckin" href="masuk.php?id=<?= $row['username']; ?>" onclick="return confirm('Apakah anda yakin absen?'); ">Check-In</a>
+                                           <button id="btnCheckOut" class="btn btn-success">Check-Out</button>
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>              
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="card">
+                                    <div class="card-body">
                                     <table class="table">
                               <thead>
                                 <tr>
-                                  <th scope="col">Nama</th>
-                                  <th scope="col">NIM</th>
+                                  <th scope="col">No</th>
+                                  <th scope="col">Tanggal</th>
                                   <th scope="col">Jam Masuk</th>
                                   <th scope="col">Jam Keluar</th>
                                   <th scope="col">Keterangan</th>
-                                
                                 </tr>
                               </thead>
                               <tbody>
-                              <?php 
-                              // if (is_array($results) || is_object($results))
-                              // {
-                              // foreach ($results as $rows) :
-                              //   ?>
                                 <tr>
-                                  <td><a class="btn btn-warning" role="button" href="masuk.php?id=<?= $row['username']; ?>" onclick="return confirm('Apakah anda yakin absen?');">Absen</a></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>
-                                  <td></td>                               
+                                  <td>1</td>
+                                  <td><p id="tanggal"><?php echo $dataPresensi['tanggal'] ?></p></td>
+                                  <td><p id="txtJamMasuk"><?php echo $dataPresensi['jam_masuk'] ?></p></td>
+                                  <td><p id="txtJamKeluar"><?php echo $dataPresensi['jam_keluar'] ?></p></td>
+                                  <td><?php echo $dataPresensi['status']; ?></td>
                                 </tr>
-                                 <?php 
-                                //  endforeach; }
-                                ?> 
+                             
                               </tbody>
                             </table>
                                     </div>
@@ -303,20 +323,24 @@ if (!isset($_SESSION["login"])) {
         </div>
         <!-- Akhir Body -->
 
-
     </div>
     <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <script src="assets/libs/js/main-js.js"></script>
-    <script src="assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
-    <script src="assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
-    <script src="assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-    <script src="assets/vendor/charts/morris-bundle/morris.js"></script>
     <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/C3chartjs.js"></script>
-    <script src="assets/libs/js/dashboard-ecommerce.js"></script>
+    
+    <script type="text/javascript">
+    jQuery(function($){
+        var jam_masuk = $("#txtJamMasuk").text();
+        var jam_keluar = $("#txtJamKeluar").text();
+
+        if (jam_masuk=='00:00:00'){
+            $("#btnCheckin").attr('disabled', false);
+            $("#btnCheckOut").attr('disabled', true);
+        } 
+    });
+    </script>
 </body>
  
 </html>
