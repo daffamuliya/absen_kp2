@@ -99,4 +99,8 @@ function hapus($id) {
     return mysqli_affected_rows($conn);
 }
 
+function masuk($id) {
+    global $conn;
+    return mysqli_affected_rows($conn);
+}
 
