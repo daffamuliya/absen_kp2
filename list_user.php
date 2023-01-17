@@ -180,7 +180,7 @@ $mahasiswa = query("SELECT * FROM user where level = 'Mahasiswa' ")
                                             <a class="nav-link" href="list_user.php">List Mahasiswa</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/carousel.html">Input Mahasiswa</a>
+                                            <a class="nav-link" href="halaman_kirim_email.php">Kirim E-mail (Akun)</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -191,7 +191,7 @@ $mahasiswa = query("SELECT * FROM user where level = 'Mahasiswa' ")
                                 <div id="submenu-4" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/form-elements.html">Daftar Hadir</a>
+                                            <a class="nav-link" href="daftar_hadir_mahasiswa.php">Daftar Hadir</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="pages/form-elements.html">Daftar Tidak Hadir</a>
@@ -250,7 +250,7 @@ $mahasiswa = query("SELECT * FROM user where level = 'Mahasiswa' ")
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Daftar Mahasiswa (Belum Verifikasi)</a></li>
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Daftar Mahasiswa (Sudah Verifikasi)</a></li>
                                             <li class="breadcrumb-item active" aria-current="page">Sistem Informasi Absensi Mahasiswa PKL (Magang)</li>
                                         </ol>
                                     </nav>

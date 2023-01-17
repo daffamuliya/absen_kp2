@@ -11,7 +11,7 @@ if (!isset($_SESSION["login"])) {
 // $mahasiswa = query("SELECT * FROM tb_mahasiswa");
 
 $mahasiswa = query("SELECT tb_bidang.nama_bidang, tb_mahasiswa.nama, tb_mahasiswa.nobp,tb_mahasiswa.email,tb_mahasiswa.universitas,tb_mahasiswa.jurusan,tb_mahasiswa.id_bidang,tb_mahasiswa.id_subbidang,
-tb_mahasiswa.tanggalmasuk,tb_mahasiswa.tanggalkeluar,tb_mahasiswa.lamapkl FROM tb_mahasiswa JOIN tb_bidang on tb_bidang.id_bidang = tb_mahasiswa.id_bidang LEFT JOIN user on user.username = tb_mahasiswa.nobp where user.username IS NULL")
+tb_mahasiswa.tanggalmasuk,tb_mahasiswa.tanggalkeluar,tb_mahasiswa.lamapkl,tb_mahasiswa.surat_pernyataan FROM tb_mahasiswa JOIN tb_bidang on tb_bidang.id_bidang = tb_mahasiswa.id_bidang LEFT JOIN user on user.username = tb_mahasiswa.nobp where user.username IS NULL")
 
 ?>
 
@@ -182,7 +182,7 @@ tb_mahasiswa.tanggalmasuk,tb_mahasiswa.tanggalkeluar,tb_mahasiswa.lamapkl FROM t
                                             <a class="nav-link" href="list_user.php">List Mahasiswa</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/carousel.html">Input Mahasiswa</a>
+                                            <a class="nav-link" href="halaman_kirim_email.php">Kirim E-mail (Akun)</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -193,7 +193,7 @@ tb_mahasiswa.tanggalmasuk,tb_mahasiswa.tanggalkeluar,tb_mahasiswa.lamapkl FROM t
                                 <div id="submenu-4" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/form-elements.html">Daftar Hadir</a>
+                                            <a class="nav-link" href="daftar_hadir_mahasiswa.php">Daftar Hadir</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="pages/form-elements.html">Daftar Tidak Hadir</a>
@@ -278,6 +278,7 @@ tb_mahasiswa.tanggalmasuk,tb_mahasiswa.tanggalkeluar,tb_mahasiswa.lamapkl FROM t
                                   <th scope="col">Bidang</th>
                                   <th scope="col">Sub Bidang</th>
                                   <th scope="col">Durasi</th>
+                                  <th scope="col">Surat Pernyataan</th>
                                   <th colspan="2">Action</th>
                                 </tr>
                               </thead>
@@ -293,6 +294,7 @@ tb_mahasiswa.tanggalmasuk,tb_mahasiswa.tanggalkeluar,tb_mahasiswa.lamapkl FROM t
                                   <td><?= $row["nama_bidang"] ?></td>
                                   <td><?= $row["id_subbidang"] ?></td>
                                   <td><?= $row["lamapkl"] ?></td> 
+                                  <td><a style = "color:blue" href="download.php?surat_pernyataan=<?=$row['surat_pernyataan']?>"><u>Download<u></a></td> 
                                   <td><a class="btn btn-warning" role="button" href="verifikasi.php?id=<?= $row["nobp"] ?>" onclick="return confirm('Apakah yakin verifikasi data?');">Verifikasi</a></td>
                                 </tr>
                                 <?php endforeach; ?>

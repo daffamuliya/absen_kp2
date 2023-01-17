@@ -2,6 +2,7 @@
 session_start();
 
 require 'conn.php';
+date_default_timezone_set('Asia/Jakarta');
 if (!isset($_SESSION["login"])) {
   header("Location: login_user.php");
   exit;
@@ -10,13 +11,22 @@ if (!isset($_SESSION["login"])) {
   $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$_SESSION[username]'");
   $row    = mysqli_fetch_assoc($result);
 
-  $results = mysqli_query($conn, "SELECT * FROM tb_kehadiran ");
+  $tgl = date('Y-m-d');
+  $tgl1 = date('l jS \of F Y');
+  $results = mysqli_query($conn, "SELECT * FROM tb_kehadiran WHERE nobp = '$row[username]' and tanggal = '$tgl' ");
   $rows    = mysqli_fetch_assoc($results);
+  
+  $numRows = mysqli_num_rows($result);
+  if($numRows>0){
+    $PresensiID = $rows['id']; 
+  }else{
+    $PresensiID = '';
+  }
 
   if($rows){
     $dataPresensi = ['jam_masuk'=>$rows['jam_masuk'], 'jam_keluar'=>$rows['jam_keluar'], 'tanggal'=>$rows['tanggal'],'status'=>$rows['status']];
   }else{
-    $dataPresensi = ['jam_masuk'=>"00:00:00", 'jam_keluar'=>"00:00:00", 'status'=>""];  
+    $dataPresensi = ['jam_masuk'=>"00:00:00", 'jam_keluar'=>"00:00:00", 'status'=>"", "tanggal" => "-"];  
   }
  
 
@@ -251,15 +261,25 @@ if (!isset($_SESSION["login"])) {
                                 <div class="card">
                                     <div class="card-body">
                                        <div class="col-xl-12 text-center">
-                                           <h2>Rabu, 2022/01/12</h2>
-                                           <a class="btn btn-warning " role="button" id="btnCheckin" href="masuk.php?id=<?= $row['username']; ?>" onclick="return confirm('Apakah anda yakin absen?'); ">Check-In</a>
+                                           <h2><?php echo $tgl1 ?></h2>
+                                           <button id="btnCheckin" class="btn btn-warning">Check-In</button>
                                            <button id="btnCheckOut" class="btn btn-success">Check-Out</button>
+                                        </div>
+                                        <div class="row justify-content-center mt-2 text-center">
+                                           <div class="col-2 text-right">
+                                           <p id="txtJamMasuk"><?php echo $dataPresensi['jam_masuk']; ?></p>
+                                           </div>
+                                          <div class="col-2 text-left ">
+                                          <p id="txtJamKeluar"><?php echo $dataPresensi['jam_keluar']; ?></p>
+                                          </div>
                                         </div>
                                     </div>
                                 </div>
                         </div>              
                     </div>
 
+    
+                    <input type="text" id="idKehadiran" value="<?=$PresensiID?>" hidden>
                     <div class="row">
                         <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
@@ -277,9 +297,9 @@ if (!isset($_SESSION["login"])) {
                               <tbody>
                                 <tr>
                                   <td>1</td>
-                                  <td><p id="tanggal"><?php echo $dataPresensi['tanggal'] ?></p></td>
-                                  <td><p id="txtJamMasuk"><?php echo $dataPresensi['jam_masuk'] ?></p></td>
-                                  <td><p id="txtJamKeluar"><?php echo $dataPresensi['jam_keluar'] ?></p></td>
+                                  <td><?php echo $dataPresensi['tanggal'] ?></td>
+                                  <td><?php echo $dataPresensi['jam_masuk'] ?></td>
+                                  <td><?php echo $dataPresensi['jam_keluar'] ?></td>
                                   <td><?php echo $dataPresensi['status']; ?></td>
                                 </tr>
                              
@@ -338,7 +358,52 @@ if (!isset($_SESSION["login"])) {
         if (jam_masuk=='00:00:00'){
             $("#btnCheckin").attr('disabled', false);
             $("#btnCheckOut").attr('disabled', true);
-        } 
+        }else{
+            $("#btnCheckin").attr('disabled', true);
+            $("#btnCheckOut").attr('disabled', false);
+        }
+
+        $(document).on('click', "#btnCheckin", function(e){
+            confirm("Anda Mengisi Absensi ?");
+            var uri = "masuk.php?id="+<?= $row['username']; ?>;
+        
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: uri,
+                success: function(data){
+                    $("#idKehadiran").val(data.id);
+                    $("#txtJamMasuk").text(data.jam);
+                    $("#btnCheckin").attr('disabled', true);
+                    $("#btnCheckOut").attr('disabled', false);
+                     alert(data.msg);
+                     console.log(data);
+                }
+            });
+        });
+
+        $(document).on('click', "#btnCheckOut", function(e){
+            confirm("Anda Ingin Check-Out ?");
+            var id = $("#idKehadiran").val();
+            var keluar = "keluar.php?id="+id;
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: keluar,
+                success: function(data){
+                    console.log(data);
+                    $("#txtJamKeluar").text(data.jam);
+                    $("#btnCheckin").attr('disabled', true);
+                    $("#btnCheckOut").attr('disabled', true);
+                     alert(data.msg);
+                }
+            });
+        });
+
+        if (jam_keluar!='00:00:00'){
+            $("#btnCheckin").attr('disabled', true);
+            $("#btnCheckOut").attr('disabled', true);
+        }
     });
     </script>
 </body>

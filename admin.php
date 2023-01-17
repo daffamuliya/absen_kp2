@@ -180,7 +180,7 @@ if (!isset($_SESSION["login"])) {
                                             <a class="nav-link" href="list_user.php">List Mahasiswa</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/carousel.html">Input Mahasiswa</a>
+                                            <a class="nav-link" href="halaman_kirim_email.php">Kirim E-mail (Akun)</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -191,7 +191,7 @@ if (!isset($_SESSION["login"])) {
                                 <div id="submenu-4" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/form-elements.html">Daftar Hadir</a>
+                                            <a class="nav-link" href="daftar_hadir_mahasiswa.php">Daftar Hadir</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="pages/form-elements.html">Daftar Tidak Hadir</a>
