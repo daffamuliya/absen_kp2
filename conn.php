@@ -104,3 +104,19 @@ function masuk($id) {
     return mysqli_affected_rows($conn);
 }
 
+function ubah ($data) {
+    
+    global $conn;
+    
+    $password_baru = mysqli_real_escape_string($conn, $data["password_baru"]);
+    $password_baru = password_hash($password_baru,PASSWORD_DEFAULT);
+    $query = "UPDATE user SET password='$password_baru' WHERE username = '$_SESSION[username]'";
+
+    mysqli_query ($conn, $query);
+
+    return mysqli_affected_rows($conn);
+
+
+
+}
+

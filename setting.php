@@ -1,33 +1,22 @@
 <?php
 session_start();
-
 require 'conn.php';
-date_default_timezone_set('Asia/Jakarta');
-if (!isset($_SESSION["login"])) {
-  header("Location: login_user.php");
-  exit;
-}
+
+
+  
+  if(isset ($_POST["submit"])) {
+    
+    if (ubah($_POST) > 0) {
+      echo "<script>alert('Berhasil!');window.location='setting.php'</script>";
+    }  else {
+      echo "<script>alert('Gagal!');window.location='setting.php'</script>";
+    }
+    
+  
+  }
 
   $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$_SESSION[username]'");
   $row    = mysqli_fetch_assoc($result);
-
-  $tgl = date('Y-m-d');
-  $tgl1 = date('l jS \of F Y');
-  $results = mysqli_query($conn, "SELECT * FROM tb_kehadiran WHERE nobp = '$row[username]' and tanggal = '$tgl' ");
-  $rows    = mysqli_fetch_assoc($results);
-  
-  $numRows = mysqli_num_rows($result);
-  if($numRows>0){
-    $PresensiID = $rows['id']; 
-  }else{
-    $PresensiID = '';
-  }
-
-  if($rows){
-    $dataPresensi = ['jam_masuk'=>$rows['jam_masuk'], 'jam_keluar'=>$rows['jam_keluar'], 'tanggal'=>$rows['tanggal'],'status'=>$rows['status']];
-  }else{
-    $dataPresensi = ['jam_masuk'=>"00:00:00", 'jam_keluar'=>"00:00:00", 'status'=>"", "tanggal" => "-"];  
-  }
  
 
 ?>
@@ -52,41 +41,12 @@ if (!isset($_SESSION["login"])) {
     <link rel="stylesheet" href="assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-$( function() {
-  $( "#date" ).datepicker({
-    dateFormat: "Y-m-d"
-  });
-} );
-</script>
 
-
-    <script type="text/javascript"> 
-        function display_ct6() {
-        var x = new Date()
-        var ampm = x.getHours( ) >= 12 ? ' PM' : ' AM';
-        hours = x.getHours( ) % 12;
-        hours = hours ? hours : 12;
-        var x1=x.getMonth() + 1+ "/" + x.getDate() + "/" + x.getFullYear(); 
-        x1 = x1 + " - " +  hours + ":" +  x.getMinutes() + ":" +  x.getSeconds() + ":" + ampm;
-        document.getElementById('ct6').innerHTML = x1;
-        display_c6();
-        }
-        function display_c6(){
-        var refresh=1000; // Refresh rate in milli seconds
-        mytime=setTimeout('display_ct6()',refresh)
-        }
-        display_c6()
-    </script>
 
     <title>Absensi</title>
 </head>
 
-<body onload=display_ct6();>
+<body>
     <div class="dashboard-main-wrapper">
         
        <!-- Mulai Navbar -->
@@ -114,7 +74,7 @@ $( function() {
                                                     <div class="notification-list-user-block"><span class="notification-list-user-name">Jeremy Rakestraw</span>accepted your invitation to join the team.
                                                         <div class="notification-date">2 min ago</div>
                                                     </div>
-                                                </div>
+                                             </div>
                                             </a>
                                             <a href="#" class="list-group-item list-group-item-action">
                                                 <div class="notification-info">
@@ -185,10 +145,11 @@ $( function() {
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
                                     <h5 class="mb-0 text-white nav-user-name"> <?php echo $row['nama']; ?> </h5>
+                                    <input type="hidden" name="username" value="<?= $row["username"] ?>"/>
                                     <span class="status"></span><span class="ml-2">Mahasiswa PKL, <?php echo $row['username']; ?></span>
                                 </div>
                                 <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
-                                <a class="dropdown-item" href="setting.php"><i class="fas fa-cog mr-2"></i>Setting</a>
+                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
                                 <a class="dropdown-item" href="logout.php"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
@@ -226,7 +187,7 @@ $( function() {
                     
                          
                             <li class="nav-item ">
-                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Kehadiran</a>
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Kehadiran</a>
                                 <div id="submenu-4" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
@@ -289,21 +250,29 @@ $( function() {
                         <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                       <div class="col-xl-12 text-center">
-                                             <h2>Laporan Absensi Bulanan</h2>                        
+                                       <div class="col-xl-12 text-left">
+                                             <h4>Data Mahasiswa</h4>                        
                                        </div>
-                                        <div class="row justify-content-center mt-2 text-center">
-                                            <div class="col-6 mt-1">
-                                            <form method="get">
-                                                <div class="input-group date" data-provide="datepicker">
-                                                    <input  type="text" id="date" name ="tanggal" placeholder="Tanggal" class="form-control">
-                                                    <input type="submit" value="FILTER">
-                                                </div>
-                                                </form>
-                                                <div class="input-group-addon">
-                                                   <span class="glyphicon glyphicon-th"></span>
-                                                </div>
-                                            </div>                 
+                                        <div class="col-xl-12 text-left">
+                                            <form action="" method="post">
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputEmail1" class="form-label" disabled >Nama Lengkap</label>
+                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="<?php echo $row['nama']; ?>" disabled >
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputPassword1" class="form-label">NIM</label>
+                                                        <input type="text" class="form-control" id="exampleInputPassword1" name ="username" value="<?php echo $row['username']; ?>" disabled >
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputPassword1" class="form-label">Password</label>
+                                                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="<?php echo $row['password']; ?>" disabled>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputPassword1" class="form-label">Ganti Password</label>
+                                                        <input type="text" class="form-control" id="exampleInputPassword1" name="password_baru" >
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary" name="submit">Edit</button>
+                                             </form>
                                         </div>
                                     </div>
                                 </div>
@@ -313,48 +282,7 @@ $( function() {
     
                     <input type="text" id="idKehadiran" value="<?=$PresensiID?>" hidden>
                     <div class="row">
-                        <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                    <table class="table">
-                              <thead>
-                                <tr>
-                                  <th scope="col">No</th>
-                                  <th scope="col">Tanggal</th>
-                                  <th scope="col">Jam Masuk</th>
-                                  <th scope="col">Jam Keluar</th>
-                                  <th scope="col">Keterangan</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-
-                              <?php 
- 
-                                    if(isset($_GET['tanggal'])){
-                                    $tgl = $_GET['tanggal'];
-                                    $sql = mysqli_query($conn,"select * from tb_kehadiran where tanggal='$tgl'");
-                                    }else{
-                                    $sql = mysqli_query($conn,"select * from tb_kehadiran");
-                                    }   $rows    = mysqli_fetch_assoc($sql);
-
-                                ?>
-
-                                <?php foreach ($sql as $rows) :
-                                ?>
-                                <tr>
-                                  <td>1</td>
-                                  <td><?php echo $rows['tanggal'] ?></td>
-                                  <td><?php echo $rows['jam_masuk'] ?></td>
-                                  <td><?php echo $rows['jam_keluar'] ?></td>
-                                  <td><?php echo $rows['status']; ?></td>
-                                </tr>
-                                <?php endforeach; ?> 
-
-                              </tbody>
-                            </table>
-                                    </div>
-                                </div>
-                        </div>
+                 
                   
                     </div>
 
@@ -396,65 +324,8 @@ $( function() {
     <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <script src="assets/libs/js/main-js.js"></script>
     <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="js/bootstrap-datepicker.js"></script>
     
-    <script type="text/javascript">
-    jQuery(function($){
-        var jam_masuk = $("#txtJamMasuk").text();
-        var jam_keluar = $("#txtJamKeluar").text();
-
-        if (jam_masuk=='00:00:00'){
-            $("#btnCheckin").attr('disabled', false);
-            $("#btnCheckOut").attr('disabled', true);
-        }else{
-            $("#btnCheckin").attr('disabled', true);
-            $("#btnCheckOut").attr('disabled', false);
-        }
-
-        $(document).on('click', "#btnCheckin", function(e){
-            confirm("Anda Mengisi Absensi ?");
-            var uri = "masuk.php?id="+<?= $row['username']; ?>;
-        
-            $.ajax({
-                type: "POST",
-                dataType: 'json',
-                url: uri,
-                success: function(data){
-                    $("#idKehadiran").val(data.id);
-                    $("#txtJamMasuk").text(data.jam);
-                    $("#btnCheckin").attr('disabled', true);
-                    $("#btnCheckOut").attr('disabled', false);
-                     alert(data.msg);
-                     console.log(data);
-                }
-            });
-        });
-
-        $(document).on('click', "#btnCheckOut", function(e){
-            confirm("Anda Ingin Check-Out ?");
-            var id = $("#idKehadiran").val();
-            var keluar = "keluar.php?id="+id;
-            $.ajax({
-                type: "POST",
-                dataType: 'json',
-                url: keluar,
-                success: function(data){
-                    console.log(data);
-                    $("#txtJamKeluar").text(data.jam);
-                    $("#btnCheckin").attr('disabled', true);
-                    $("#btnCheckOut").attr('disabled', true);
-                     alert(data.msg);
-                }
-            });
-        });
-
-        if (jam_keluar!='00:00:00'){
-            $("#btnCheckin").attr('disabled', true);
-            $("#btnCheckOut").attr('disabled', true);
-        }
-    });
-    </script>
+   
 </body>
  
 </html>
