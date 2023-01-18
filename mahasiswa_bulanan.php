@@ -52,6 +52,19 @@ if (!isset($_SESSION["login"])) {
     <link rel="stylesheet" href="assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+$( function() {
+  $( "#date" ).datepicker({
+    dateFormat: "Y-m-d"
+  });
+} );
+</script>
+
+
     <script type="text/javascript"> 
         function display_ct6() {
         var x = new Date()
@@ -277,18 +290,17 @@ if (!isset($_SESSION["login"])) {
                                 <div class="card">
                                     <div class="card-body">
                                        <div class="col-xl-12 text-center">
-                                           <h2><?php echo $tgl1 ?></h2>
-                                           <h2 id="ct6"></h2>
-                                           <button id="btnCheckin" class="btn btn-warning">Check-In</button>
-                                           <button id="btnCheckOut" class="btn btn-success">Check-Out</button>
-                                        </div>
+                                             <h2>Laporan Absensi Bulanan</h2>                        
+                                       </div>
                                         <div class="row justify-content-center mt-2 text-center">
-                                           <div class="col-2 text-right">
-                                           <p id="txtJamMasuk"><?php echo $dataPresensi['jam_masuk']; ?></p>
-                                           </div>
-                                          <div class="col-2 text-left ">
-                                          <p id="txtJamKeluar"><?php echo $dataPresensi['jam_keluar']; ?></p>
-                                          </div>
+                                            <div class="col-6 mt-1">
+                                                <div class="input-group date" data-provide="datepicker">
+                                                    <input type="text" id="date" placeholder="Tanggal" class="form-control">
+                                                </div>
+                                                <div class="input-group-addon">
+                                                   <span class="glyphicon glyphicon-th"></span>
+                                                </div>
+                                            </div>                 
                                         </div>
                                     </div>
                                 </div>
@@ -366,6 +378,8 @@ if (!isset($_SESSION["login"])) {
     <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <script src="assets/libs/js/main-js.js"></script>
     <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
     
     <script type="text/javascript">
     jQuery(function($){

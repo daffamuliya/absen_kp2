@@ -13,7 +13,7 @@ if (!isset($_SESSION["login"])) {
   $tgl1 = date('l jS \of F Y');
 
 
-  $results = mysqli_query($conn, "SELECT * FROM tb_kehadiran where tanggal = '$tgl' and status='Tidak Hadir' ");
+  $results = mysqli_query($conn, "SELECT * FROM tb_kehadiran where tanggal = '$tgl' and status='Alfa' ");
   $rows    = mysqli_fetch_assoc($results);
 
  
@@ -294,8 +294,8 @@ if (!isset($_SESSION["login"])) {
                                 <tr>
                                   <td><?php echo $rows['nama'] ?></td>
                                   <td><?php echo $rows['nobp'] ?></td>
-                                  <td><?php echo $rows['jam_masuk'] ?></td>
-                                  <td><?php echo $rows['jam_keluar'] ?></p></td>
+                                  <td>-</td>
+                                  <td>-</td>
                                   <td><?php echo $rows['status'] ?></td>
                                 </tr>
                                 <?php endforeach; ?>

@@ -174,9 +174,7 @@ if (!isset($_SESSION["login"])) {
                                         <li class="nav-item">
                                             <a class="nav-link" href="absen_hadir.php">Daftar Hadir</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="pages/form-elements.html">Daftar Tidak Hadir</a>
-                                        </li>
+                                  
                                     </ul>
                                 </div>
                             </li>
@@ -185,10 +183,10 @@ if (!isset($_SESSION["login"])) {
                                 <div id="submenu-5" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/general-table.html">Laporan Harian</a>
+                                            <a class="nav-link" href="mahasiswa_harian.php">Laporan Harian</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/data-tables.html">Laporan Bulanan</a>
+                                            <a class="nav-link" href="mahasiswa_bulanan.php">Laporan Bulanan</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="pages/data-tables.html">Cetak Laporan</a>
@@ -234,6 +232,19 @@ if (!isset($_SESSION["login"])) {
                                 <div class="card">
                                     <div class="card-body">
                                     <img src="img/pages.png" alt="Logo" width = "100%" class="d-inline-block align-text-top" style ="margin=2px">
+                                    </div>
+                                </div>
+                        </div>
+                  
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xl-8 col-lg-6 col-md-6 col-sm-12 col-12 text-center">
+                                <div class="card">
+                                    <div class="card-body">
+                                    <a href="absen_hadir.php">
+                                        <button type="button" class="btn btn-warning" >Ambil Absensi Disini</button>
+                                    </a> 
                                     </div>
                                 </div>
                         </div>
