@@ -10,24 +10,14 @@ if (!isset($_SESSION["login"])) {
 
   $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$_SESSION[username]'");
   $row    = mysqli_fetch_assoc($result);
+  $id = $row['username'];
 
   $tgl = date('Y-m-d');
   $tgl1 = date('l jS \of F Y');
-  $results = mysqli_query($conn, "SELECT * FROM tb_kehadiran WHERE nobp = '$row[username]' and tanggal = '$tgl' ");
+  $results = mysqli_query($conn, "SELECT * FROM tb_kehadiran WHERE nobp = '$id' and tanggal = '$tgl' ");
   $rows    = mysqli_fetch_assoc($results);
   
-  $numRows = mysqli_num_rows($result);
-  if($numRows>0){
-    $PresensiID = $rows['id']; 
-  }else{
-    $PresensiID = '';
-  }
 
-  if($rows){
-    $dataPresensi = ['jam_masuk'=>$rows['jam_masuk'], 'jam_keluar'=>$rows['jam_keluar'], 'tanggal'=>$rows['tanggal'],'status'=>$rows['status']];
-  }else{
-    $dataPresensi = ['jam_masuk'=>"00:00:00", 'jam_keluar'=>"00:00:00", 'status'=>"", "tanggal" => "-"];  
-  }
  
 
 ?>
@@ -53,48 +43,19 @@ if (!isset($_SESSION["login"])) {
     <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-$( function() {
-  $( "#date" ).datepicker({
-    dateFormat: "Y-m-d"
-  });
-} );
-</script>
-
-
-    <script type="text/javascript"> 
-        function display_ct6() {
-        var x = new Date()
-        var ampm = x.getHours( ) >= 12 ? ' PM' : ' AM';
-        hours = x.getHours( ) % 12;
-        hours = hours ? hours : 12;
-        var x1=x.getMonth() + 1+ "/" + x.getDate() + "/" + x.getFullYear(); 
-        x1 = x1 + " - " +  hours + ":" +  x.getMinutes() + ":" +  x.getSeconds() + ":" + ampm;
-        document.getElementById('ct6').innerHTML = x1;
-        display_c6();
-        }
-        function display_c6(){
-        var refresh=1000; // Refresh rate in milli seconds
-        mytime=setTimeout('display_ct6()',refresh)
-        }
-        display_c6()
-    </script>
-
     <title>Absensi</title>
+
 </head>
 
-<body onload=display_ct6();>
+<body >
     <div class="dashboard-main-wrapper">
         
-       <!-- Mulai Navbar -->
-        <div class="dashboard-header">
+     <!-- Mulai Navbar -->
+     <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="index.html">
-                <img src="img/Logo_PLN.svg.png" alt="Logo" width = "10%" class="d-inline-block align-text-top" style ="margin=2px">
-             </a>
+            <a class="navbar-brand" href="index.html" style ="color:#2a93a7"> PLN UID SUMBAR <!-- <img src="img/Logo_PLN.svg.png" alt="Logo" width = "10%" class="d-inline-block align-text-top" style ="margin=2px"> --></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -184,8 +145,8 @@ $( function() {
                             <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img/pln.png" alt="" class="user-avatar-md rounded-circle"></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name"> <?php echo $row['nama']; ?> </h5>
-                                    <span class="status"></span><span class="ml-2">Mahasiswa PKL, <?php echo $row['username']; ?></span>
+                                    <h5 class="mb-0 text-white nav-user-name"> Admin </h5>
+                                    <span class="status"></span><span class="ml-2"><?php echo $row['username']; ?></span>
                                 </div>
                                 <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
                                 <a class="dropdown-item" href="setting.php"><i class="fas fa-cog mr-2"></i>Setting</a>
@@ -297,7 +258,7 @@ $( function() {
                                             <form method="get">
                                                 <div class="input-group date" data-provide="datepicker">
                                                     <input  type="text" id="date" name ="tanggal" placeholder="Tanggal" class="form-control">
-                                                    <input type="submit" value="FILTER">
+                                                    <input type="submit" class="btn btn-warning" style ="margin-left:5px"value="FILTER">
                                                 </div>
                                                 </form>
                                                 <div class="input-group-addon">
@@ -316,6 +277,8 @@ $( function() {
                         <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
+                                    <div class="table-responsive">
+
                                     <table class="table">
                               <thead>
                                 <tr>
@@ -332,26 +295,28 @@ $( function() {
  
                                     if(isset($_GET['tanggal'])){
                                     $tgl = $_GET['tanggal'];
-                                    $sql = mysqli_query($conn,"select * from tb_kehadiran where tanggal='$tgl'");
+                                    $sql = mysqli_query($conn,"select * from tb_kehadiran where nobp = '$id' and tanggal='$tgl'");
                                     }else{
-                                    $sql = mysqli_query($conn,"select * from tb_kehadiran");
-                                    }   $rows    = mysqli_fetch_assoc($sql);
+                                    $sql = mysqli_query($conn,"select * from tb_kehadiran where nobp = '$id' ");
+                                    }   
+                                    $sil    = mysqli_fetch_assoc($sql);
 
                                 ?>
 
-                                <?php foreach ($sql as $rows) :
+                                <?php foreach ($sql as $sil) :
                                 ?>
                                 <tr>
                                   <td>1</td>
-                                  <td><?php echo $rows['tanggal'] ?></td>
-                                  <td><?php echo $rows['jam_masuk'] ?></td>
-                                  <td><?php echo $rows['jam_keluar'] ?></td>
-                                  <td><?php echo $rows['status']; ?></td>
+                                  <td><?php echo $sil['tanggal'] ?></td>
+                                  <td><?php echo $sil['jam_masuk'] ?></td>
+                                  <td><?php echo $sil['jam_keluar'] ?></td>
+                                  <td><?php echo $sil['status']; ?></td>
                                 </tr>
                                 <?php endforeach; ?> 
 
                               </tbody>
                             </table>
+                                </div>
                                     </div>
                                 </div>
                         </div>
@@ -398,63 +363,15 @@ $( function() {
     <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="js/bootstrap-datepicker.js"></script>
-    
-    <script type="text/javascript">
-    jQuery(function($){
-        var jam_masuk = $("#txtJamMasuk").text();
-        var jam_keluar = $("#txtJamKeluar").text();
-
-        if (jam_masuk=='00:00:00'){
-            $("#btnCheckin").attr('disabled', false);
-            $("#btnCheckOut").attr('disabled', true);
-        }else{
-            $("#btnCheckin").attr('disabled', true);
-            $("#btnCheckOut").attr('disabled', false);
-        }
-
-        $(document).on('click', "#btnCheckin", function(e){
-            confirm("Anda Mengisi Absensi ?");
-            var uri = "masuk.php?id="+<?= $row['username']; ?>;
-        
-            $.ajax({
-                type: "POST",
-                dataType: 'json',
-                url: uri,
-                success: function(data){
-                    $("#idKehadiran").val(data.id);
-                    $("#txtJamMasuk").text(data.jam);
-                    $("#btnCheckin").attr('disabled', true);
-                    $("#btnCheckOut").attr('disabled', false);
-                     alert(data.msg);
-                     console.log(data);
-                }
-            });
+    <script>
+        $( function() {
+        $( "#date" ).datepicker({
+            dateFormat: "Y-m-d"
         });
-
-        $(document).on('click', "#btnCheckOut", function(e){
-            confirm("Anda Ingin Check-Out ?");
-            var id = $("#idKehadiran").val();
-            var keluar = "keluar.php?id="+id;
-            $.ajax({
-                type: "POST",
-                dataType: 'json',
-                url: keluar,
-                success: function(data){
-                    console.log(data);
-                    $("#txtJamKeluar").text(data.jam);
-                    $("#btnCheckin").attr('disabled', true);
-                    $("#btnCheckOut").attr('disabled', true);
-                     alert(data.msg);
-                }
-            });
-        });
-
-        if (jam_keluar!='00:00:00'){
-            $("#btnCheckin").attr('disabled', true);
-            $("#btnCheckOut").attr('disabled', true);
-        }
-    });
+        } );
     </script>
+    
+
 </body>
  
 </html>

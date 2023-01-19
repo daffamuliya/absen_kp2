@@ -47,11 +47,9 @@ if (!isset($_SESSION["login"])) {
     <div class="dashboard-main-wrapper">
         
        <!-- Mulai Navbar -->
-        <div class="dashboard-header">
+       <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="index.html">
-                <img src="img/Logo_PLN.svg.png" alt="Logo" width = "10%" class="d-inline-block align-text-top" style ="margin=2px">
-             </a>
+            <a class="navbar-brand" href="index.html" style ="color:#2a93a7"> PLN UID SUMBAR <!-- <img src="img/Logo_PLN.svg.png" alt="Logo" width = "10%" class="d-inline-block align-text-top" style ="margin=2px"> --></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -141,11 +139,11 @@ if (!isset($_SESSION["login"])) {
                             <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img/pln.png" alt="" class="user-avatar-md rounded-circle"></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name"> <?php echo $row['nama']; ?> </h5>
-                                    <span class="status"></span><span class="ml-2">Mahasiswa PKL, <?php echo $row['username']; ?></span>
+                                    <h5 class="mb-0 text-white nav-user-name"> Admin </h5>
+                                    <span class="status"></span><span class="ml-2"><?php echo $row['username']; ?></span>
                                 </div>
                                 <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
-                                <a class="dropdown-item" href="#"><i class="fas fa-cog mr-2"></i>Setting</a>
+                                <a class="dropdown-item" href="setting.php"><i class="fas fa-cog mr-2"></i>Setting</a>
                                 <a class="dropdown-item" href="logout.php"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
@@ -278,6 +276,8 @@ if (!isset($_SESSION["login"])) {
                                     <div class="card-body">
                                         <h3 style = "margin-bottom : 10px ; margin-left:5px">List Mahasiswa Tidak Hadir  </h3>
                                         <h6 style = "color : #71728e; opacity : 80%;  margin-left:5px">Hari ini/Tanggal : <?php echo $tgl1 ?>  </h6>
+                                        <div class="table-responsive">
+
                                     <table class="table">
                               <thead>
                                 <tr>
@@ -302,6 +302,7 @@ if (!isset($_SESSION["login"])) {
                              
                               </tbody>
                             </table>
+                              </div>
                                     </div>
                                 </div>
                         </div>
