@@ -216,7 +216,7 @@ if (!isset($_SESSION["login"])) {
                                 <div id="submenu-5" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/general-table.html">Laporan Harian</a>
+                                            <a class="nav-link" href="admin_harian.php">Laporan Harian</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="admin_bulanan.php">Laporan Bulanan</a>
@@ -281,10 +281,10 @@ if (!isset($_SESSION["login"])) {
                                              <h2>Laporan Absensi Bulanan</h2>                        
                                        </div>
                                         <div class="row justify-content-center mt-2 text-center">
-                                            <div class="col-6 mt-1">
+                                            <div class="col-6 mt-1 text-center">
                                             <form method="get">
-                                                <div class="input-group date" data-provide="datepicker" autocomplete=off>
-                                                    <input  type="text" id="date" name ="tanggal" placeholder="Tanggal" class="form-control" autocomplete= "off">
+                                               <div class="input-group date" data-provide="datepicker" autocomplete=off>
+                                                    <input type="month" id="month" name="month" placeholder="Bulan"  class="form-control">
                                                     <input type="submit" class="btn btn-warning" style ="margin-left:5px"value="FILTER">
                                                 </div>
                                                 </form>
@@ -319,16 +319,15 @@ if (!isset($_SESSION["login"])) {
                               </thead>
                               <tbody>
 
-                              <?php 
- 
-                                    if(isset($_GET['tanggal'])){
-                                    $tgl = $_GET['tanggal'];
-                                    $sql = mysqli_query($conn,"select * from tb_kehadiran where tanggal='$tgl'");
+                              <?php  
+                                    if(isset($_GET['month'])){
+                                    $bulan = $_GET['month'];
+                                    $sql = mysqli_query($conn,"select * from tb_kehadiran where substr(tanggal,1,7) ='$bulan'");
                                     }else{
                                     $sql = mysqli_query($conn,"select * from tb_kehadiran  ");
                                     }   
-                                    $sil    = mysqli_fetch_assoc($sql);
-
+                                    $sil = mysqli_fetch_assoc($sql);
+                                   
                                 ?>
 
                                 <?php foreach ($sql as $sil) :
@@ -392,13 +391,13 @@ if (!isset($_SESSION["login"])) {
     <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="js/bootstrap-datepicker.js"></script>
-    <script>
+    <!-- <script>
         $( function() {
-        $( "#date" ).datepicker({
+        $( "#month" ).datepicker({
             format: "yyyy-mm-dd"
         });
         } );
-    </script>
+    </script> -->
     
 
 </body>

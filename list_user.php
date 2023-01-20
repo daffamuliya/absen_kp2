@@ -204,7 +204,7 @@ $row    = mysqli_fetch_assoc($mahasiswa);
                                 <div id="submenu-5" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/general-table.html">Laporan Harian</a>
+                                            <a class="nav-link" href="admin_harian.php">Laporan Harian</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="admin_bulanan.php">Laporan Bulanan</a>

@@ -159,8 +159,8 @@ if (!isset($_SESSION["login"])) {
         </div>
        <!-- Akhir Navbar -->
 
-    <!-- Mulai Sidebar -->
-    <div class="nav-left-sidebar sidebar-dark">
+     <!-- Mulai Sidebar -->
+     <div class="nav-left-sidebar sidebar-dark">
             <div class="menu-list">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a class="d-xl-none d-lg-none" href="admin.php">Dashboard</a>
@@ -178,34 +178,48 @@ if (!isset($_SESSION["login"])) {
                                     <ul class="nav flex-column">
                                        
                                         <li class="nav-item">
-                                            <a class="nav-link" href="mahasiswa.php">Dashboard</a>
+                                            <a class="nav-link" href="admin.php">Dashboard</a>
                                         </li>
                                     
                                     </ul>
                                 </div>
                             </li>
-                    
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>User</a>
+                                <div id="submenu-2" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="list_user.php">List Mahasiswa</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="halaman_kirim_email.php">Kirim E-mail (Akun)</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
                          
                             <li class="nav-item ">
-                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Kehadiran</a>
+                                <a class="nav-link " href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Kehadiran</a>
                                 <div id="submenu-4" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="absen_hadir.php">Daftar Hadir</a>
+                                            <a class="nav-link" href="daftar_hadir_mahasiswa.php">Daftar Hadir</a>
                                         </li>
-                                        
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="daftar_tidak_hadir_mahasiswa.php">Daftar Tidak Hadir</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Riwayat</a>
+                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Laporan</a>
                                 <div id="submenu-5" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="mahasiswa_harian.php">Laporan Harian</a>
+                                            <a class="nav-link" href="admin_harian.php">Laporan Harian</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="mahasiswa_bulanan.php">Laporan Bulanan</a>
+                                            <a class="nav-link" href="admin_bulanan.php">Laporan Bulanan</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="pages/data-tables.html">Cetak Laporan</a>
@@ -213,7 +227,20 @@ if (!isset($_SESSION["login"])) {
                                     </ul>
                                 </div>
                             </li>
-     
+                            <li class="nav-divider">
+                                Features
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fas fa-fw fa-file"></i> Verifikasi </a>
+                                <div id="submenu-6" class="collapse submenu" style="">
+                                    <ul class="nav flex-column">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="verifikasi_admin.php">Daftar Mahasiswa</a>
+                                        </li>
+                              
+                                    </ul>
+                                </div>
+                            </li>
                         
                         </ul>
                     </div>
@@ -251,7 +278,7 @@ if (!isset($_SESSION["login"])) {
                                 <div class="card">
                                     <div class="card-body">
                                        <div class="col-xl-12 text-center">
-                                             <h2>Laporan Absensi Bulanan</h2>                        
+                                             <h2>Laporan Absensi Harian</h2>                        
                                        </div>
                                         <div class="row justify-content-center mt-2 text-center">
                                             <div class="col-6 mt-1">
@@ -283,6 +310,7 @@ if (!isset($_SESSION["login"])) {
                               <thead>
                                 <tr>
                                   <th scope="col">No</th>
+                                  <th scope="col">Nama</th>
                                   <th scope="col">Tanggal</th>
                                   <th scope="col">Jam Masuk</th>
                                   <th scope="col">Jam Keluar</th>
@@ -295,9 +323,9 @@ if (!isset($_SESSION["login"])) {
  
                                     if(isset($_GET['tanggal'])){
                                     $tgl = $_GET['tanggal'];
-                                    $sql = mysqli_query($conn,"select * from tb_kehadiran where tanggal ='$tgl' and nobp = '$id' ");
+                                    $sql = mysqli_query($conn,"select * from tb_kehadiran where tanggal='$tgl'");
                                     }else{
-                                    $sql = mysqli_query($conn,"select * from tb_kehadiran where nobp = '$id' ");
+                                    $sql = mysqli_query($conn,"select * from tb_kehadiran  ");
                                     }   
                                     $sil    = mysqli_fetch_assoc($sql);
 
@@ -307,6 +335,7 @@ if (!isset($_SESSION["login"])) {
                                 ?>
                                 <tr>
                                   <td>1</td>
+                                  <td><?php echo $sil['nama'] ?></td>
                                   <td><?php echo $sil['tanggal'] ?></td>
                                   <td><?php echo $sil['jam_masuk'] ?></td>
                                   <td><?php echo $sil['jam_keluar'] ?></td>

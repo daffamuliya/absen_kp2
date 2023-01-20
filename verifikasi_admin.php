@@ -194,7 +194,7 @@ tb_mahasiswa.tanggalmasuk,tb_mahasiswa.tanggalkeluar,tb_mahasiswa.lamapkl,tb_mah
                                             <a class="nav-link" href="daftar_hadir_mahasiswa.php">Daftar Hadir</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/form-elements.html">Daftar Tidak Hadir</a>
+                                            <a class="nav-link" href="daftar_tidak_hadir_mahasiswa.php">Daftar Tidak Hadir</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -204,7 +204,7 @@ tb_mahasiswa.tanggalmasuk,tb_mahasiswa.tanggalkeluar,tb_mahasiswa.lamapkl,tb_mah
                                 <div id="submenu-5" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/general-table.html">Laporan Harian</a>
+                                            <a class="nav-link" href="admin_harian.php">Laporan Harian</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="admin_bulanan.php">Laporan Bulanan</a>

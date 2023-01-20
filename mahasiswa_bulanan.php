@@ -257,7 +257,7 @@ if (!isset($_SESSION["login"])) {
                                             <div class="col-6 mt-1">
                                             <form method="get">
                                                 <div class="input-group date" data-provide="datepicker" autocomplete=off>
-                                                    <input  type="text" id="date" name ="tanggal" placeholder="Tanggal" class="form-control" autocomplete= "off">
+                                                <input type="month" id="month" name="month" placeholder="Bulan"  class="form-control">
                                                     <input type="submit" class="btn btn-warning" style ="margin-left:5px"value="FILTER">
                                                 </div>
                                                 </form>
@@ -293,9 +293,9 @@ if (!isset($_SESSION["login"])) {
 
                               <?php 
  
-                                    if(isset($_GET['tanggal'])){
-                                    $tgl = $_GET['tanggal'];
-                                    $sql = mysqli_query($conn,"select * from tb_kehadiran where nobp = '$id' and tanggal='$tgl'");
+                                    if(isset($_GET['month'])){
+                                    $bulan = $_GET['month'];
+                                    $sql = mysqli_query($conn,"select * from tb_kehadiran where substr(tanggal,1,7) ='$bulan' and nobp = '$id' ");
                                     }else{
                                     $sql = mysqli_query($conn,"select * from tb_kehadiran where nobp = '$id' ");
                                     }   
