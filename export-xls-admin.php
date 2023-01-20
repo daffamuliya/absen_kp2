@@ -12,7 +12,7 @@
 
  //menampilkan data sebagai array dari tabel kehadiran
  $out=array();
- $sql=mysqli_query($conn, "select * from tb_kehadiran where nobp = '$_SESSION[username]' ");
+ $sql=mysqli_query($conn, "select * from tb_kehadiran  ");
  while($data=mysqli_fetch_assoc($sql)) $out[]=$data;
 
  $show_coloumn = false;

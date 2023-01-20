@@ -216,7 +216,7 @@ if (!isset($_SESSION["login"])) {
                                             <a class="nav-link" href="admin_bulanan.php">Laporan Bulanan</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/data-tables.html">Cetak Laporan</a>
+                                            <a class="nav-link" href="export-xls-admin.php">Cetak Laporan</a>
                                         </li>
                                     </ul>
                                 </div>
