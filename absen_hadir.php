@@ -169,7 +169,7 @@ if (!isset($_SESSION["login"])) {
                             <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img/pln.png" alt="" class="user-avatar-md rounded-circle"></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name"> Admin </h5>
+                                    <h5 class="mb-0 text-white nav-user-name"> <?php echo $row['nama']; ?> </h5>
                                     <span class="status"></span><span class="ml-2"><?php echo $row['username']; ?></span>
                                 </div>
                                 <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>

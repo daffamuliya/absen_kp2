@@ -41,7 +41,7 @@ function tambah ($data) {
     $id_bidang = ($data["id_bidang"]);
     $id_subbidang = ($data["id_subbidang"]);
     $tanggalmasuk = ($data["tanggalmasuk"]);
-    $tanggalkeluar = ($data["tanggalmasuk"]);
+    $tanggalkeluar = ($data["tanggalkeluar"]);
     $lamapkl = ($data["lamapkl"]);
    
     $query = "INSERT INTO tb_mahasiswa VALUES ('$nobp','$nama','$email','$surat_pernyataan', '$universitas','$jurusan','$id_bidang','$id_subbidang','$tanggalmasuk','$tanggalkeluar','$lamapkl')";
@@ -118,5 +118,11 @@ function ubah ($data) {
 
 
 
+}
+
+function detail($id) {
+    global $conn;
+    mysqli_query($conn, "SELECT FROM user WHERE id =$id");
+    return mysqli_affected_rows($conn);
 }
 

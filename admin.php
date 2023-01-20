@@ -1,6 +1,8 @@
 <?php
 session_start();
 require 'conn.php';
+date_default_timezone_set('Asia/Jakarta');
+
 if (!isset($_SESSION["login"])) {
   header("Location: login_user.php");
   exit;
@@ -8,6 +10,15 @@ if (!isset($_SESSION["login"])) {
 
   $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$_SESSION[username]'");
   $row    = mysqli_fetch_assoc($result);
+  $tgl = date('Y-m-d');
+
+  $results = mysqli_query($conn, "SELECT * FROM tb_kehadiran WHERE tanggal = '$tgl' ");
+  $rows    = mysqli_fetch_assoc($results);
+  $numRows = mysqli_num_rows($results);
+
+  $mahasiswa = mysqli_query($conn, "SELECT * FROM tb_mahasiswa ");
+  $rm    = mysqli_fetch_assoc($mahasiswa);
+  $numRm = mysqli_num_rows($mahasiswa);
 
 
 
@@ -205,7 +216,7 @@ if (!isset($_SESSION["login"])) {
                                             <a class="nav-link" href="pages/general-table.html">Laporan Harian</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/data-tables.html">Laporan Bulanan</a>
+                                            <a class="nav-link" href="admin_bulanan.php">Laporan Bulanan</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="pages/data-tables.html">Cetak Laporan</a>
@@ -276,7 +287,7 @@ if (!isset($_SESSION["login"])) {
                                     <div class="card-body">
                                         <h5 class="text-muted">Total Mahasiswa PKL</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">234</h1>
+                                            <h1 class="mb-1"><?php echo $numRm ?></h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-success font-weight-bold">
                                         </div>
@@ -288,7 +299,7 @@ if (!isset($_SESSION["login"])) {
                                     <div class="card-body">
                                         <h5 class="text-muted">Total Hadir / Hari Ini</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">112</h1>
+                                            <h1 class="mb-1"><?php echo $numRows ?></h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-success font-weight-bold">
                                         </div>

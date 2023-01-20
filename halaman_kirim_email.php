@@ -205,7 +205,7 @@ require 'conn.php';
                                             <a class="nav-link" href="pages/general-table.html">Laporan Harian</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/data-tables.html">Laporan Bulanan</a>
+                                            <a class="nav-link" href="admin_bulanan.php">Laporan Bulanan</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="pages/data-tables.html">Cetak Laporan</a>

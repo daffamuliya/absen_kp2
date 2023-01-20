@@ -9,7 +9,9 @@ if (!isset($_SESSION["login"])) {
 }
 
 
-$mahasiswa = query("SELECT * FROM user where level = 'Mahasiswa' ")
+$mahasiswa = mysqli_query($conn, "SELECT * FROM user where level = 'Mahasiswa' ");
+$row    = mysqli_fetch_assoc($mahasiswa);
+
 
 ?>
 
@@ -205,7 +207,7 @@ $mahasiswa = query("SELECT * FROM user where level = 'Mahasiswa' ")
                                             <a class="nav-link" href="pages/general-table.html">Laporan Harian</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/data-tables.html">Laporan Bulanan</a>
+                                            <a class="nav-link" href="admin_bulanan.php">Laporan Bulanan</a>
                                         </li>
                                         <li class="nav-item">
                                             <a class="nav-link" href="pages/data-tables.html">Cetak Laporan</a>
@@ -260,7 +262,7 @@ $mahasiswa = query("SELECT * FROM user where level = 'Mahasiswa' ")
                     <div class="ecommerce-widget">
 
                     <div class="row">
-                        <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -279,7 +281,9 @@ $mahasiswa = query("SELECT * FROM user where level = 'Mahasiswa' ")
                                                         <td><?= $row["nama"] ?></th>
                                                         <td><?= $row["username"] ?></td>
                                                         <td><?= $row["level"] ?></td>
-                                                        <td><a class="btn btn-danger" role="button" href="hapus.php?id=<?= $row["id"] ?>" onclick="return confirm('Apakah yakin menghapus data?');">Hapus</a></td> 
+                                                        <td><a class="btn btn-danger mb-1"   role="button" href="hapus.php?id=<?= $row["id"] ?>" onclick="return confirm('Apakah yakin menghapus data?');">Hapus</a>
+                                                            <a class="btn btn-warning btnDetail mb-1"  role="button" data-id="<?= $row["id"] ?>" data-bs-toggle="modal"  >Details</a>
+                                                        </td> 
                                                         </tr>
                                                         <?php endforeach; ?>
                                                     </tbody>
@@ -290,6 +294,53 @@ $mahasiswa = query("SELECT * FROM user where level = 'Mahasiswa' ")
                         </div>
                   
                     </div>
+
+                     <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Data Mahasiswa</h1>
+                                        </div>
+                                        <div class="modal-body">
+                                        <form action="" method="">
+                                                    <div class="mb-3">
+                                                        <label for="inputNama" class="form-label" disabled >Nama Lengkap</label>
+                                                        <input type="text" class="form-control" id="inputNama" aria-describedby="emailHelp"  disabled >
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="nim" class="form-label">NIM</label>
+                                                        <input type="text" class="form-control" id="nim" name ="username"  disabled >
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="email" class="form-label">Email</label>
+                                                        <input type="text" class="form-control" id="email" disabled>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="jurusan" class="form-label">Jurusan</label>
+                                                        <input type="text" class="form-control" id="jurusan" name="jurusan"   disabled >
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="bidang" class="form-label">Bidang</label>
+                                                        <input type="text" class="form-control" id="bidang" name="bidang"   disabled >
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="subbidang" class="form-label">Sub Bidang</label>
+                                                        <input type="text" class="form-control" id="subbidang" name="subbidang"   disabled >
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="durasipkl" class="form-label">Durasi PKL</label>
+                                                        <input type="text" class="form-control" id="durasipkl" name="durasipkl"   disabled >
+                                                    </div>
+                                             </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                                        </div>
+                                </div>
+                        </div>
+                    </div>
+
 
                     <div class="row">
                      
@@ -339,6 +390,34 @@ $mahasiswa = query("SELECT * FROM user where level = 'Mahasiswa' ")
     <script src="assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
     <script src="assets/vendor/charts/c3charts/C3chartjs.js"></script>
     <script src="assets/libs/js/dashboard-ecommerce.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
 </body>
+    <script type="application/javascript">
+        jQuery(function($){
+            $(document).on('click', '.btnDetail', function (e) {
+            var id = $(this).data('id');
+            $("#exampleModal").modal('show');
+            $.ajax({
+                url:"detail.php",
+                type:"POST",
+                dataType:"json",
+                data:{id:id},
+                success:function(response){
+                    console.log(response)
+                    $("#inputNama").val(response.nama)
+                    $("#nim").val(response.nobp)
+                    $("#email").val(response.email)
+                    $("#jurusan").val(response.jurusan)
+                    $("#bidang").val(response.nama_bidang)
+                    $("#subbidang").val(response.id_subbidang)
+                    $("#durasipkl").val(response.lamapkl)
+
+
+                }
+            });
+            });
+        });
+    </script>
  
 </html>

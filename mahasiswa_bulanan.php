@@ -145,7 +145,7 @@ if (!isset($_SESSION["login"])) {
                             <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img/pln.png" alt="" class="user-avatar-md rounded-circle"></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name"> Admin </h5>
+                                    <h5 class="mb-0 text-white nav-user-name"> <?php echo $row['nama']; ?>  </h5>
                                     <span class="status"></span><span class="ml-2"><?php echo $row['username']; ?></span>
                                 </div>
                                 <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
@@ -256,8 +256,8 @@ if (!isset($_SESSION["login"])) {
                                         <div class="row justify-content-center mt-2 text-center">
                                             <div class="col-6 mt-1">
                                             <form method="get">
-                                                <div class="input-group date" data-provide="datepicker">
-                                                    <input  type="text" id="date" name ="tanggal" placeholder="Tanggal" class="form-control">
+                                                <div class="input-group date" data-provide="datepicker" autocomplete=off>
+                                                    <input  type="text" id="date" name ="tanggal" placeholder="Tanggal" class="form-control" autocomplete= "off">
                                                     <input type="submit" class="btn btn-warning" style ="margin-left:5px"value="FILTER">
                                                 </div>
                                                 </form>
@@ -366,7 +366,7 @@ if (!isset($_SESSION["login"])) {
     <script>
         $( function() {
         $( "#date" ).datepicker({
-            dateFormat: "Y-m-d"
+            format: "yyyy-mm-dd"
         });
         } );
     </script>
