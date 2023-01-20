@@ -208,7 +208,7 @@ if (!isset($_SESSION["login"])) {
                                             <a class="nav-link" href="mahasiswa_bulanan.php">Laporan Bulanan</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/data-tables.html">Cetak Laporan</a>
+                                            <a class="nav-link" href="export-xls.php">Cetak Laporan</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -251,7 +251,7 @@ if (!isset($_SESSION["login"])) {
                                 <div class="card">
                                     <div class="card-body">
                                        <div class="col-xl-12 text-center">
-                                             <h2>Laporan Absensi Bulanan</h2>                        
+                                             <h2>Laporan Absensi Harian</h2>                        
                                        </div>
                                         <div class="row justify-content-center mt-2 text-center">
                                             <div class="col-6 mt-1">

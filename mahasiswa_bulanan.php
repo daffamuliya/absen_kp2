@@ -208,7 +208,7 @@ if (!isset($_SESSION["login"])) {
                                             <a class="nav-link" href="mahasiswa_bulanan.php">Laporan Bulanan</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/data-tables.html">Cetak Laporan</a>
+                                            <a class="nav-link" href="export-xls.php">Cetak Laporan</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -321,6 +321,12 @@ if (!isset($_SESSION["login"])) {
                                 </div>
                         </div>
                   
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                        <a href="export-xls.php">Export xls</a> 
+                        </div>
                     </div>
 
                   
