@@ -2,21 +2,21 @@
 session_start();
 require 'conn.php';
 
+  $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$_SESSION[username]'");
+  $row    = mysqli_fetch_assoc($result);
 
   
   if(isset ($_POST["submit"])) {
-    
-    if (ubah($_POST) > 0) {
-      echo "<script>alert('Berhasil!');window.location='setting.php'</script>";
-    }  else {
-      echo "<script>alert('Gagal!');window.location='setting.php'</script>";
-    }
-    
-  
+       
+   $password_lama = $_POST ["password_lama"];
+   if (password_verify($password_lama, $row["password"]) && ubah($_POST) > 0) {
+        echo "<script>alert('Berhasil!');window.location='setting.php'</script>";
+      }  else {
+        echo "<script>alert('Password lama salah!');window.location='setting.php'</script>";
+      }
+      
   }
 
-  $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$_SESSION[username]'");
-  $row    = mysqli_fetch_assoc($result);
  
 
 ?>
@@ -261,12 +261,12 @@ require 'conn.php';
                                                         <input type="text" class="form-control" id="exampleInputPassword1" name ="username" value="<?php echo $row['username']; ?>" disabled >
                                                     </div>
                                                     <div class="mb-3">
-                                                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                                                        <input type="text" class="form-control" id="exampleInputPassword1" placeholder="<?php echo $row['password']; ?>" disabled>
+                                                        <label for="exampleInputPassword1" class="form-label">Password Lama</label>
+                                                        <input type="password" class="form-control" id="exampleInputPassword1" name="password_lama" Required  >
                                                     </div>
                                                     <div class="mb-3">
                                                         <label for="exampleInputPassword1" class="form-label">Ganti Password</label>
-                                                        <input type="text" class="form-control" id="exampleInputPassword1" name="password_baru" >
+                                                        <input type="password" class="form-control" id="exampleInputPassword1" name="password_baru" >
                                                     </div>
                                                     <button type="submit" class="btn btn-primary" name="submit">Edit</button>
                                              </form>

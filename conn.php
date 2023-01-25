@@ -16,7 +16,7 @@ function registrasi ($data) {
     global $conn;
     $password = mysqli_real_escape_string($conn, $data["password"]);
     $password = password_hash($password,PASSWORD_DEFAULT);
-
+    
     // Insert Database
     mysqli_query($conn, "INSERT INTO user VALUES('','$nobp','$password','$level')");
     return mysqli_affected_rows($conn);
@@ -110,7 +110,7 @@ function ubah ($data) {
     
     $password_baru = mysqli_real_escape_string($conn, $data["password_baru"]);
     $password_baru = password_hash($password_baru,PASSWORD_DEFAULT);
-    $query = "UPDATE user SET password='$password_baru' WHERE username = '$_SESSION[username]'";
+    $query = "UPDATE user SET password='$password_baru', status='1' WHERE username = '$_SESSION[username]'";
 
     mysqli_query ($conn, $query);
 

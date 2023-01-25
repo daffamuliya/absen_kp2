@@ -2,14 +2,15 @@
 session_start();
 
 require 'conn.php';
+$result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$_SESSION[username]'");
+$row    = mysqli_fetch_assoc($result);
+$password = $row["password"];
 if (!isset($_SESSION["login"])) {
   header("Location: login_user.php");
   exit;
 }
 
-  $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$_SESSION[username]'");
-  $row    = mysqli_fetch_assoc($result);
-
+  
 
 
 ?>
@@ -219,7 +220,22 @@ if (!isset($_SESSION["login"])) {
                                         </ol>
                                     </nav>
                                 </div>
+                            </div> 
+
+                            <?php if ( $row["status"] == 0 ) : ?>
+                            <div class="alert alert-danger" role="alert">
+                                Ganti Password anda di Setting!
                             </div>
+
+                            <?php else : ?>
+                            <div class = "alert alert-success" role="alert" hidden>
+                                Password anda Benar!
+                            <div>
+                            <?php endif; ?>
+                           
+
+                            
+
                         </div>
                     </div>
                 

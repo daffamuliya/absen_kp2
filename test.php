@@ -8,7 +8,7 @@ date_default_timezone_set('Asia/Jakarta');
 $tgl = date('Y-m-d');
 
 
-$result = mysqli_query($conn, "select * from user where level !='admin'");
+$result = mysqli_query($conn, "select * from user where level != 'admin'");
 while($rows = mysqli_fetch_assoc($result)){
     $ada = Check($rows['username']);
     if($ada==0){

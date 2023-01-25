@@ -19,7 +19,7 @@ if (isset($_POST["login"])) {
     $row = mysqli_fetch_assoc($result);
     if (password_verify($password, $row["password"])) {
       $_SESSION["login"]=true;
-      $_SESSION["username"]=$row["username"]; //Mendaftarkan session username dari row username
+      $_SESSION["username"]=$row["username"];  //Mendaftarkan session username dari row username
       if ($row["level"] === "Admin") {
       header("Location: admin.php");
       exit;
