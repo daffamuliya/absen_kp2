@@ -272,6 +272,16 @@ if (!isset($_SESSION["login"])) {
                     </div>
                 
                     <div class="ecommerce-widget">
+                    <?php  
+                                    if(isset($_GET['month'])){
+                                    $bulan = $_GET['month'];
+                                    $sql = mysqli_query($conn,"select * from tb_kehadiran where substr(tanggal,1,7) ='$bulan'");
+                                    }else{
+                                    $sql = mysqli_query($conn,"select * from tb_kehadiran  ");
+                                    }   
+                                    $sil = mysqli_fetch_assoc($sql);
+                                   
+                                ?>
 
                     <div class="row">
                         <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -286,6 +296,7 @@ if (!isset($_SESSION["login"])) {
                                                <div class="input-group date" data-provide="datepicker" autocomplete=off>
                                                     <input type="month" id="month" name="month" placeholder="Bulan"  class="form-control">
                                                     <input type="submit" class="btn btn-warning" style ="margin-left:5px"value="FILTER">
+                                                    <a class="btn btn-light ml-1" href="export_get_admin_bulan.php?bulan=<?= $bulan ?>" role="button">Cetak</a>
                                                 </div>
                                                 </form>
                                                 <div class="input-group-addon">
@@ -319,16 +330,7 @@ if (!isset($_SESSION["login"])) {
                               </thead>
                               <tbody>
 
-                              <?php  
-                                    if(isset($_GET['month'])){
-                                    $bulan = $_GET['month'];
-                                    $sql = mysqli_query($conn,"select * from tb_kehadiran where substr(tanggal,1,7) ='$bulan'");
-                                    }else{
-                                    $sql = mysqli_query($conn,"select * from tb_kehadiran  ");
-                                    }   
-                                    $sil = mysqli_fetch_assoc($sql);
-                                   
-                                ?>
+                             
 
                                 <?php foreach ($sql as $sil) :
                                 ?>
