@@ -4,7 +4,7 @@
  require 'conn.php';
 
  // nama file
- $filename="laporan_bulanan".".xls";
+ $filename="laporan_keseluruhan".".xls";
 
  //header info for browser
  header("Content-Type: application/vnd-ms-excel"); 
