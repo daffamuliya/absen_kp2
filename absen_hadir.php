@@ -26,7 +26,7 @@ if (!isset($_SESSION["login"])) {
   if($rows){
     $dataPresensi = ['jam_masuk'=>$rows['jam_masuk'], 'jam_keluar'=>$rows['jam_keluar'], 'tanggal'=>$rows['tanggal'],'status'=>$rows['status']];
   }else{
-    $dataPresensi = ['jam_masuk'=>"00:00:00", 'jam_keluar'=>"00:00:00", 'status'=>"", "tanggal" => "-"];  
+    $dataPresensi = ['jam_masuk'=>"00:00:01", 'jam_keluar'=>"00:00:01", 'status'=>"", "tanggal" => "-"];  
   }
  
 
@@ -373,7 +373,7 @@ if (!isset($_SESSION["login"])) {
         var jam_masuk = $("#txtJamMasuk").text();
         var jam_keluar = $("#txtJamKeluar").text();
 
-        if (jam_masuk=='00:00:00'){
+        if (jam_masuk=='00:00:01'){
             $("#btnCheckin").attr('disabled', false);
             $("#btnCheckOut").attr('disabled', true);
         }else{
@@ -418,7 +418,7 @@ if (!isset($_SESSION["login"])) {
             });
         });
 
-        if (jam_keluar!='00:00:00'){
+        if (jam_keluar!='00:00:01'){
             $("#btnCheckin").attr('disabled', true);
             $("#btnCheckOut").attr('disabled', true);
         }
