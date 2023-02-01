@@ -46,7 +46,7 @@ $rows    = mysqli_fetch_assoc($result);
      <!-- Mulai Navbar -->
      <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="index.html" style ="color:#2a93a7"> PLN UID SUMBAR <!-- <img src="img/Logo_PLN.svg.png" alt="Logo" width = "10%" class="d-inline-block align-text-top" style ="margin=2px"> --></a>
+            <a class="navbar-brand" href="admin.php" style ="color:#2a93a7"> PLN UID SUMBAR <!-- <img src="img/Logo_PLN.svg.png" alt="Logo" width = "10%" class="d-inline-block align-text-top" style ="margin=2px"> --></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -140,7 +140,7 @@ $rows    = mysqli_fetch_assoc($result);
                                     <span class="status"></span><span class="ml-2"><?php echo $rows['username']; ?></span>
                                 </div>
                                 <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
-                                <a class="dropdown-item" href="setting.php"><i class="fas fa-cog mr-2"></i>Setting</a>
+                                <a class="dropdown-item" href="setting_admin.php"><i class="fas fa-cog mr-2"></i>Setting</a>
                                 <a class="dropdown-item" href="logout.php"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
                         </li>
@@ -272,7 +272,7 @@ $rows    = mysqli_fetch_assoc($result);
                                     <form action="kirim_email.php" method="post" class="form-signin">
                         <div class="form-label-group">
                             <label for="inputEmail">From <span style="color: #FF0000">*</span></label>
-                            <input type="text" name="fromEmail" id="fromEmail" class="form-control"  value="info@codingbirdsonline.com" readonly required autofocus>
+                            <input type="text" name="fromEmail" id="fromEmail" class="form-control"  value="pln@wilayahsumbar.com" readonly required autofocus>
                         </div> <br/>
                         <div class="form-label-group">
                             <label for="inputEmail">To <span style="color: #FF0000">*</span></label>

@@ -1,20 +1,24 @@
 <?php
 session_start();
-
 require 'conn.php';
+
+  $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$_SESSION[username]'");
+  $row    = mysqli_fetch_assoc($result);
+
+  
+  if(isset ($_POST["submit"])) {
+       
+   $password_lama = $_POST ["password_lama"];
+   if (password_verify($password_lama, $row["password"]) && ubah($_POST) > 0) {
+        echo "<script>alert('Berhasil!');window.location='setting.php'</script>";
+      }  else {
+        echo "<script>alert('Password lama salah!');window.location='setting.php'</script>";
+      }
+      
+  }
+
  
-if (!isset($_SESSION["login"])) {
-  header("Location: login_user.php");
-  exit;
-}
 
-// $mahasiswa = query("SELECT * FROM tb_mahasiswa");
-
-$mahasiswa = query("SELECT tb_bidang.nama_bidang, tb_mahasiswa.nama, tb_mahasiswa.nobp,tb_mahasiswa.email,tb_mahasiswa.universitas,tb_mahasiswa.jurusan,tb_mahasiswa.id_bidang,tb_mahasiswa.id_subbidang,
-tb_mahasiswa.tanggalmasuk,tb_mahasiswa.tanggalkeluar,tb_mahasiswa.lamapkl,tb_mahasiswa.surat_pernyataan FROM tb_mahasiswa JOIN tb_bidang on tb_bidang.id_bidang = tb_mahasiswa.id_bidang LEFT JOIN user on user.username = tb_mahasiswa.nobp where user.username IS NULL");
-
-$result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$_SESSION[username]'");
-$row    = mysqli_fetch_assoc($result);
 ?>
 
 
@@ -26,6 +30,7 @@ $row    = mysqli_fetch_assoc($result);
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
+
     <link rel="icon" type="image/png" href="img/pln.png" />
     <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
     <link href="assets/vendor/fonts/circular-std/style.css" rel="stylesheet">
@@ -36,7 +41,9 @@ $row    = mysqli_fetch_assoc($result);
     <link rel="stylesheet" href="assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <title>Admin</title>
+
+
+    <title>Absensi</title>
 </head>
 
 <body>
@@ -45,7 +52,7 @@ $row    = mysqli_fetch_assoc($result);
         <!-- Mulai Navbar -->
         <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
-            <a class="navbar-brand" href="admin.php" style ="color:#2a93a7"> PLN UID SUMBAR <!-- <img src="img/Logo_PLN.svg.png" alt="Logo" width = "10%" class="d-inline-block align-text-top" style ="margin=2px"> --></a>
+            <a class="navbar-brand" href="index.html" style ="color:#2a93a7"> PLN UID SUMBAR <!-- <img src="img/Logo_PLN.svg.png" alt="Logo" width = "10%" class="d-inline-block align-text-top" style ="margin=2px"> --></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -149,11 +156,11 @@ $row    = mysqli_fetch_assoc($result);
         </div>
        <!-- Akhir Navbar -->
 
-        <!-- Mulai Sidebar -->
-        <div class="nav-left-sidebar sidebar-dark">
+          <!-- Mulai Sidebar -->
+          <div class="nav-left-sidebar sidebar-dark">
             <div class="menu-list">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a class="d-xl-none d-lg-none" href="#">Dashboard</a>
+                    <a class="d-xl-none d-lg-none" href="admin.php">Dashboard</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -163,7 +170,7 @@ $row    = mysqli_fetch_assoc($result);
                                 Menu
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
                                 <div id="submenu-1" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                        
@@ -221,11 +228,11 @@ $row    = mysqli_fetch_assoc($result);
                                 Features
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fas fa-fw fa-file"></i> Verifikasi </a>
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-6" aria-controls="submenu-6"><i class="fas fa-fw fa-file"></i> Verifikasi </a>
                                 <div id="submenu-6" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
-                                            <a class="nav-link" href="verifikasi_admin.php">Data Mahasiswa</a>
+                                            <a class="nav-link" href="verifikasi_admin.php">Daftar Mahasiswa</a>
                                         </li>
                               
                                     </ul>
@@ -247,12 +254,12 @@ $row    = mysqli_fetch_assoc($result);
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h2 class="pageheader-title">Halo, Selamat Datang! </h2>
+                                <h2 class="pageheader-title">Halo <?php echo $row['nama']; ?>, Silahkan Isi Presensi! </h2>
                                 <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Daftar Mahasiswa (Belum Verifikasi)</a></li>
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
                                             <li class="breadcrumb-item active" aria-current="page">Sistem Informasi Absensi Mahasiswa PKL (Magang)</li>
                                         </ol>
                                     </nav>
@@ -267,51 +274,43 @@ $row    = mysqli_fetch_assoc($result);
                         <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                    <div class="table-responsive">
-
-                                    <table class="table">
-                              <thead>
-                                <tr>
-                                  <th scope="col">Nama</th>
-                                  <th scope="col">NIM</th>
-                                  <th scope="col">Email</th>
-                                  <th scope="col">Jurusan</th>
-                                  <th scope="col">Universitas</th>
-                                  <th scope="col">Bidang</th>
-                                  <th scope="col">Sub Bidang</th>
-                                  <th scope="col">Durasi</th>
-                                  <th scope="col">Surat Pernyataan</th>
-                                  <th colspan="2">Action</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                              <?php foreach ($mahasiswa as $row) :
-                                ?>
-                                <tr>
-                                  <td><?= $row["nama"] ?></th>
-                                  <td><?= $row["nobp"] ?></td>
-                                  <td><?= $row["email"] ?></td>
-                                  <td><?= $row["jurusan"] ?></td>
-                                  <td><?= $row["universitas"] ?></td>
-                                  <td><?= $row["nama_bidang"] ?></td>
-                                  <td><?= $row["id_subbidang"] ?></td>
-                                  <td><?= $row["lamapkl"] ?></td> 
-                                  <td><a style = "color:blue" href="download.php?surat_pernyataan=<?=$row['surat_pernyataan']?>"><u>Download<u></a></td> 
-                                  <td><a class="btn btn-warning" role="button" href="verifikasi.php?id=<?= $row["nobp"] ?>" onclick="return confirm('Apakah yakin verifikasi data?');">Verifikasi</a></td>
-                                </tr>
-                                <?php endforeach; ?>
-                              </tbody>
-                            </table>
-                              </div>
+                                       <div class="col-xl-12 text-left">
+                                             <h4>Data Mahasiswa</h4>                        
+                                       </div>
+                                        <div class="col-xl-12 text-left">
+                                            <form action="" method="post">
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputEmail1" class="form-label" disabled >Nama User</label>
+                                                        <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="<?php echo $row['nama']; ?>" disabled >
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputPassword1" class="form-label">Level</label>
+                                                        <input type="text" class="form-control" id="exampleInputPassword1" name ="username" value="<?php echo $row['username']; ?>" disabled >
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputPassword1" class="form-label">Password Lama</label>
+                                                        <input type="password" class="form-control" id="exampleInputPassword1" name="password_lama" Required  >
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <label for="exampleInputPassword1" class="form-label">Ganti Password</label>
+                                                        <input type="password" class="form-control" id="exampleInputPassword1" name="password_baru" >
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary" name="submit">Edit</button>
+                                             </form>
+                                        </div>
                                     </div>
                                 </div>
-                        </div>
+                        </div>              
+                    </div>
+
+    
+                    <input type="text" id="idKehadiran" value="<?=$PresensiID?>" hidden>
+                    <div class="row">
+                 
                   
                     </div>
 
-                    <div class="row">
-                     
-                    </div>
+                  
                 </div>
             </div>
 
@@ -343,20 +342,14 @@ $row    = mysqli_fetch_assoc($result);
         </div>
         <!-- Akhir Body -->
 
-
     </div>
     <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
     <script src="assets/vendor/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <script src="assets/libs/js/main-js.js"></script>
-    <script src="assets/vendor/charts/chartist-bundle/chartist.min.js"></script>
-    <script src="assets/vendor/charts/sparkline/jquery.sparkline.js"></script>
-    <script src="assets/vendor/charts/morris-bundle/raphael.min.js"></script>
-    <script src="assets/vendor/charts/morris-bundle/morris.js"></script>
     <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/d3-5.4.0.min.js"></script>
-    <script src="assets/vendor/charts/c3charts/C3chartjs.js"></script>
-    <script src="assets/libs/js/dashboard-ecommerce.js"></script>
+    
+   
 </body>
  
 </html>
