@@ -12,13 +12,17 @@ if (!isset($_SESSION["login"])) {
   $row    = mysqli_fetch_assoc($result);
   $tgl = date('Y-m-d');
 
-  $results = mysqli_query($conn, "SELECT * FROM tb_kehadiran WHERE tanggal = '$tgl' ");
+  $results = mysqli_query($conn, "SELECT * FROM tb_kehadiran WHERE tanggal = '$tgl' and status ='Hadir' ");
   $rows    = mysqli_fetch_assoc($results);
   $numRows = mysqli_num_rows($results);
 
   $mahasiswa = mysqli_query($conn, "SELECT * FROM tb_mahasiswa ");
   $rm    = mysqli_fetch_assoc($mahasiswa);
   $numRm = mysqli_num_rows($mahasiswa);
+
+  $resuld = mysqli_query($conn, "SELECT * FROM tb_kehadiran WHERE tanggal = '$tgl' and status ='Alfa' ");
+  $rowss    = mysqli_fetch_assoc($resuld);
+  $numRowss = mysqli_num_rows($resuld);
 
 
 
@@ -203,7 +207,7 @@ if (!isset($_SESSION["login"])) {
                                             <a class="nav-link" href="daftar_hadir_mahasiswa.php">Daftar Hadir</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/form-elements.html">Daftar Tidak Hadir</a>
+                                            <a class="nav-link" href="daftar_tidak_hadir_mahasiswa.php">Daftar Tidak Hadir</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -309,9 +313,9 @@ if (!isset($_SESSION["login"])) {
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                 <div class="card-body">
-                                        <h5 class="text-muted">Total Izin</h5>
+                                        <h5 class="text-muted">Total Tidak Hadir / Hari Ini</h5>
                                         <div class="metric-value d-inline-block">
-                                            <h1 class="mb-1">21</h1>
+                                            <h1 class="mb-1"><?php echo $numRowss ?></h1>
                                         </div>
                                         <div class="metric-label d-inline-block float-right text-success font-weight-bold">
                                         </div>

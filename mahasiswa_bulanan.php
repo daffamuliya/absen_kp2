@@ -297,7 +297,7 @@ if (!isset($_SESSION["login"])) {
                                     $bulan = $_GET['month'];
                                     $sql = mysqli_query($conn,"select * from tb_kehadiran where substr(tanggal,1,7) ='$bulan' and nobp = '$id' ");
                                     }else{
-                                    $sql = mysqli_query($conn,"select * from tb_kehadiran where nobp = '$id' ");
+                                    $sql = mysqli_query($conn,"select * from tb_kehadiran where nobp = '$id' order by tanggal desc");
                                     }   
                                     $sil    = mysqli_fetch_assoc($sql);
 
@@ -323,11 +323,7 @@ if (!isset($_SESSION["login"])) {
                   
                     </div>
 
-                    <div class="row">
-                        <div class="col">
-                        <a href="export-xls.php">Export xls</a> 
-                        </div>
-                    </div>
+                
 
                   
                 </div>

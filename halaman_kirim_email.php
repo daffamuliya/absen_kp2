@@ -12,6 +12,10 @@ require 'conn.php';
 $mahasiswa = mysqli_query($conn, "SELECT * FROM user where level = 'Mahasiswa' ");
 $row    = mysqli_fetch_assoc($mahasiswa);
 
+$result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$_SESSION[username]'");
+$rows    = mysqli_fetch_assoc($result);
+
+
 ?>
 
 
@@ -133,7 +137,7 @@ $row    = mysqli_fetch_assoc($mahasiswa);
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
                                     <h5 class="mb-0 text-white nav-user-name"> Admin </h5>
-                                    <span class="status"></span><span class="ml-2"><?php echo $row['username']; ?></span>
+                                    <span class="status"></span><span class="ml-2"><?php echo $rows['username']; ?></span>
                                 </div>
                                 <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
                                 <a class="dropdown-item" href="setting.php"><i class="fas fa-cog mr-2"></i>Setting</a>
@@ -193,7 +197,7 @@ $row    = mysqli_fetch_assoc($mahasiswa);
                                             <a class="nav-link" href="daftar_hadir_mahasiswa.php">Daftar Hadir</a>
                                         </li>
                                         <li class="nav-item">
-                                            <a class="nav-link" href="pages/form-elements.html">Daftar Tidak Hadir</a>
+                                            <a class="nav-link" href="daftar_tidak_hadir_mahasiswa.php">Daftar Tidak Hadir</a>
                                         </li>
                                     </ul>
                                 </div>

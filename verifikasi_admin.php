@@ -11,8 +11,10 @@ if (!isset($_SESSION["login"])) {
 // $mahasiswa = query("SELECT * FROM tb_mahasiswa");
 
 $mahasiswa = query("SELECT tb_bidang.nama_bidang, tb_mahasiswa.nama, tb_mahasiswa.nobp,tb_mahasiswa.email,tb_mahasiswa.universitas,tb_mahasiswa.jurusan,tb_mahasiswa.id_bidang,tb_mahasiswa.id_subbidang,
-tb_mahasiswa.tanggalmasuk,tb_mahasiswa.tanggalkeluar,tb_mahasiswa.lamapkl,tb_mahasiswa.surat_pernyataan FROM tb_mahasiswa JOIN tb_bidang on tb_bidang.id_bidang = tb_mahasiswa.id_bidang LEFT JOIN user on user.username = tb_mahasiswa.nobp where user.username IS NULL")
+tb_mahasiswa.tanggalmasuk,tb_mahasiswa.tanggalkeluar,tb_mahasiswa.lamapkl,tb_mahasiswa.surat_pernyataan FROM tb_mahasiswa JOIN tb_bidang on tb_bidang.id_bidang = tb_mahasiswa.id_bidang LEFT JOIN user on user.username = tb_mahasiswa.nobp where user.username IS NULL");
 
+$result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$_SESSION[username]'");
+$row    = mysqli_fetch_assoc($result);
 ?>
 
 

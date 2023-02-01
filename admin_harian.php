@@ -278,7 +278,7 @@ if (!isset($_SESSION["login"])) {
                         $tgl = $_GET['tanggal'];
                         $sql = mysqli_query($conn,"select * from tb_kehadiran where tanggal='$tgl'");
                         }else{
-                        $sql = mysqli_query($conn,"select * from tb_kehadiran  ");
+                        $sql = mysqli_query($conn,"select * from tb_kehadiran order by tanggal desc  ");
                         }   
                         $sil    = mysqli_fetch_assoc($sql);
 

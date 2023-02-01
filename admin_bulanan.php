@@ -277,7 +277,7 @@ if (!isset($_SESSION["login"])) {
                                     $bulan = $_GET['month'];
                                     $sql = mysqli_query($conn,"select * from tb_kehadiran where substr(tanggal,1,7) ='$bulan'");
                                     }else{
-                                    $sql = mysqli_query($conn,"select * from tb_kehadiran  ");
+                                    $sql = mysqli_query($conn,"select * from tb_kehadiran order by tanggal desc  ");
                                     }   
                                     $sil = mysqli_fetch_assoc($sql);
                                    
@@ -293,7 +293,7 @@ if (!isset($_SESSION["login"])) {
                                         <div class="row justify-content-center mt-2 text-center">
                                             <div class="col-6 mt-1 text-center">
                                             <form method="get">
-                                               <div class="input-group date" data-provide="datepicker" autocomplete=off>
+                                               <div class="input-group date" data-provide="datepicker" autocomplete=off >
                                                     <input type="month" id="month" name="month" placeholder="Bulan"  class="form-control">
                                                     <input type="submit" class="btn btn-warning" style ="margin-left:5px"value="FILTER">
                                                     <a class="btn btn-light ml-1" href="export_get_admin_bulan.php?bulan=<?= $bulan ?>" role="button">Cetak</a>
