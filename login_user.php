@@ -28,7 +28,7 @@ if (isset($_POST["login"])) {
       }
      
     } else {
-      echo "<script>alert('Username/Password salah!');window.location='login_user.php'</script>";
+      echo "<script>alert('Username dan Password Salah atau Belum Terdaftar!');window.location='login_user.php'</script>";
     }
   }
 }

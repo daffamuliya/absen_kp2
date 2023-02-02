@@ -18,7 +18,6 @@ if (!isset($_SESSION["login"])) {
   $rows    = mysqli_fetch_assoc($results);
   
 
- 
 
 ?>
 
@@ -45,6 +44,9 @@ if (!isset($_SESSION["login"])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+
     <title>Absensi</title>
 
 </head>
@@ -262,7 +264,7 @@ if (!isset($_SESSION["login"])) {
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Laporan</a></li>
                                             <li class="breadcrumb-item active" aria-current="page">Sistem Informasi Absensi Mahasiswa PKL (Magang)</li>
                                         </ol>
                                     </nav>
@@ -292,13 +294,23 @@ if (!isset($_SESSION["login"])) {
                                              <h2>Laporan Absensi Harian</h2>                        
                                        </div>
                                         <div class="row justify-content-center mt-2 text-center">
-                                            <div class="col-6 mt-1">
+                                            <div class="col-6  mt-1">
                                             <form method="get">
                                                 <div class="input-group date" data-provide="datepicker" autocomplete=off>
-                                                    <input  type="text" id="date" name ="tanggal" placeholder="Tanggal" class="form-control" autocomplete= "off">
-                                                    <input type="submit" class="btn btn-warning" style ="margin-left:5px"value="FILTER">
-                                                    <a class="btn btn-light ml-1" href="export_get_admin.php?tanggal=<?= $tgl ?>" role="button">Cetak</a>
+                                                    <input  type="text" id="date" name ="tanggal" placeholder="Tanggal" class="form-control" autocomplete= "off" style ="margin-bottom:5px"  >
+                                                    <input type="submit" class="btn btn-warning" style ="margin-left:5px;margin-bottom:5px" value="FILTER">
+                                                    <a class="btn btn-light ml-1" href="export_get_admin.php?tanggal=<?= $tgl ?>" role="button" style ="margin-bottom:5px">Cetak</a>
                                                 </div>
+                                                <!-- <div class="dropdown-center mt-2 ">
+                                                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Nama Mahasiswa
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                     <?php foreach ($bidang as $row) : ?>
+                                                        <li><a class="dropdown-item" href="#"><?php echo $row['nama_bidang'];?></a></li>
+                                                    <?php endforeach; ?>
+                                                    </ul>
+                                                </div> -->
                                                 </form>
                                                 <div class="input-group-addon">
                                                    <span class="glyphicon glyphicon-th"></span>
@@ -394,6 +406,8 @@ if (!isset($_SESSION["login"])) {
     <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="js/bootstrap-datepicker.js"></script>
+
+
     <script>
         $( function() {
         $( "#date" ).datepicker({

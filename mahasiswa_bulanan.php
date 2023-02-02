@@ -148,7 +148,7 @@ if (!isset($_SESSION["login"])) {
                                     <h5 class="mb-0 text-white nav-user-name"> <?php echo $row['nama']; ?>  </h5>
                                     <span class="status"></span><span class="ml-2"><?php echo $row['username']; ?></span>
                                 </div>
-                                <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
+                                <a class="dropdown-item" href="user.php"><i class="fas fa-user mr-2"></i>Account</a>
                                 <a class="dropdown-item" href="setting.php"><i class="fas fa-cog mr-2"></i>Setting</a>
                                 <a class="dropdown-item" href="logout.php"><i class="fas fa-power-off mr-2"></i>Logout</a>
                             </div>
@@ -235,7 +235,7 @@ if (!isset($_SESSION["login"])) {
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Laporan</a></li>
                                             <li class="breadcrumb-item active" aria-current="page">Sistem Informasi Absensi Mahasiswa PKL (Magang)</li>
                                         </ol>
                                     </nav>
