@@ -202,6 +202,9 @@ if (!isset($_SESSION["login"])) {
                                         <li class="nav-item">
                                             <a class="nav-link" href="daftar_tidak_hadir_mahasiswa.php">Daftar Tidak Hadir</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="izin_admin.php">Input Data (Izin)</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>

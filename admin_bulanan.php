@@ -214,6 +214,9 @@ if (!isset($_SESSION["login"])) {
                                         <li class="nav-item">
                                             <a class="nav-link" href="daftar_tidak_hadir_mahasiswa.php">Daftar Tidak Hadir</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="izin_admin.php">Input Data (Izin)</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
@@ -357,34 +360,34 @@ if (!isset($_SESSION["login"])) {
                                     <div class="table-responsive">
 
                                     <table class="table">
-                              <thead>
-                                <tr>
-                                  <th scope="col"></th>
-                                  <th scope="col">Nama</th>
-                                  <th scope="col">Tanggal</th>
-                                  <th scope="col">Jam Masuk</th>
-                                  <th scope="col">Jam Keluar</th>
-                                  <th scope="col">Keterangan</th>
-                                </tr>
-                              </thead>
-                              <tbody>
+                                        <thead>
+                                            <tr>
+                                            <th scope="col"></th>
+                                            <th scope="col">Nama</th>
+                                            <th scope="col">Tanggal</th>
+                                            <th scope="col">Jam Masuk</th>
+                                            <th scope="col">Jam Keluar</th>
+                                            <th scope="col">Keterangan</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
 
-                             
+                                        
 
-                                <?php foreach ($sql1 as $sil) :
-                                ?>
-                                <tr>
-                                  <td></td>
-                                  <td><?php echo $sil['nama'] ?></td>
-                                  <td><?php echo $sil['tanggal'] ?></td>
-                                  <td><?php echo $sil['jam_masuk'] ?></td>
-                                  <td><?php echo $sil['jam_keluar'] ?></td>
-                                  <td><?php echo $sil['status']; ?></td>
-                                </tr>
-                                <?php endforeach; ?> 
+                                            <?php foreach ($sql1 as $sil) :
+                                            ?>
+                                            <tr>
+                                            <td></td>
+                                            <td><?php echo $sil['nama'] ?></td>
+                                            <td><?php echo $sil['tanggal'] ?></td>
+                                            <td><?php echo $sil['jam_masuk'] ?></td>
+                                            <td><?php echo $sil['jam_keluar'] ?></td>
+                                            <td><?php echo $sil['status']; ?></td>
+                                            </tr>
+                                            <?php endforeach; ?> 
 
-                              </tbody>
-                            </table>
+                                        </tbody>
+                                    </table>
                                 </div>
                                     </div>
                                 </div>

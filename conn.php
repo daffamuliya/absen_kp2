@@ -126,3 +126,20 @@ function detail($id) {
     return mysqli_affected_rows($conn);
 }
 
+
+function izin($data) {
+    
+    global $conn;
+    date_default_timezone_set('Asia/Jakarta');
+    $nama = ($data["nama"]);
+    $nobp = ($data["nobp"]);
+    $tanggal = date("Y-m-d");
+    $status = ($data["status"]);
+    $jam_masuk = "00:00:00";
+    $jam_keluar = "00:00:00";
+
+    mysqli_query($conn, "INSERT INTO tb_kehadiran VALUES('','$nobp','$nama','$jam_masuk','$jam_keluar','$tanggal','$status')");
+    return mysqli_affected_rows($conn);
+
+
+}

@@ -1,21 +1,12 @@
 <?php
 session_start();
-
 require 'conn.php';
-date_default_timezone_set('Asia/Jakarta');
-if (!isset($_SESSION["login"])) {
-  header("Location: login_user.php");
-  exit;
-}
 
   $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$_SESSION[username]'");
   $row    = mysqli_fetch_assoc($result);
-  $id = $row['username'];
-
-  $tgl = date('Y-m-d');
-  $tgl1 = date('l jS \of F Y');
-  $results = mysqli_query($conn, "SELECT * FROM tb_kehadiran WHERE nobp = '$id' and tanggal = '$tgl' ");
-  $rows    = mysqli_fetch_assoc($results);
+  
+  $combobox =  mysqli_query($conn, "SELECT * FROM tb_mahasiswa");
+  $combo    = mysqli_fetch_assoc($combobox);
   
 
 
@@ -41,21 +32,16 @@ if (!isset($_SESSION["login"])) {
     <link rel="stylesheet" href="assets/vendor/fonts/material-design-iconic-font/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="assets/vendor/charts/c3charts/c3.css">
     <link rel="stylesheet" href="assets/vendor/fonts/flag-icon-css/flag-icon.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+
 
     <title>Absensi</title>
-
 </head>
 
-<body >
+<body>
     <div class="dashboard-main-wrapper">
         
-     <!-- Mulai Navbar -->
-     <div class="dashboard-header">
+        <!-- Mulai Navbar -->
+        <div class="dashboard-header">
             <nav class="navbar navbar-expand-lg bg-white fixed-top">
             <a class="navbar-brand" href="admin.php" style ="color:#2a93a7"> PLN UID SUMBAR <!-- <img src="img/Logo_PLN.svg.png" alt="Logo" width = "10%" class="d-inline-block align-text-top" style ="margin=2px"> --></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -147,7 +133,7 @@ if (!isset($_SESSION["login"])) {
                             <a class="nav-link nav-user-img" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="img/pln.png" alt="" class="user-avatar-md rounded-circle"></a>
                             <div class="dropdown-menu dropdown-menu-right nav-user-dropdown" aria-labelledby="navbarDropdownMenuLink2">
                                 <div class="nav-user-info">
-                                    <h5 class="mb-0 text-white nav-user-name"> <?php echo $row['nama']; ?>  </h5>
+                                    <h5 class="mb-0 text-white nav-user-name"> Admin </h5>
                                     <span class="status"></span><span class="ml-2"><?php echo $row['username']; ?></span>
                                 </div>
                                 <a class="dropdown-item" href="#"><i class="fas fa-user mr-2"></i>Account</a>
@@ -161,8 +147,8 @@ if (!isset($_SESSION["login"])) {
         </div>
        <!-- Akhir Navbar -->
 
-     <!-- Mulai Sidebar -->
-     <div class="nav-left-sidebar sidebar-dark">
+          <!-- Mulai Sidebar -->
+          <div class="nav-left-sidebar sidebar-dark">
             <div class="menu-list">
                 <nav class="navbar navbar-expand-lg navbar-light">
                     <a class="d-xl-none d-lg-none" href="admin.php">Dashboard</a>
@@ -175,7 +161,7 @@ if (!isset($_SESSION["login"])) {
                                 Menu
                             </li>
                             <li class="nav-item ">
-                                <a class="nav-link " href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-1" aria-controls="submenu-1"><i class="fa fa-fw fa-user-circle"></i>Dashboard <span class="badge badge-success">6</span></a>
                                 <div id="submenu-1" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                        
@@ -187,7 +173,7 @@ if (!isset($_SESSION["login"])) {
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>User</a>
+                                <a class="nav-link " href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-2" aria-controls="submenu-2"><i class="fa fa-fw fa-rocket"></i>User</a>
                                 <div id="submenu-2" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
@@ -196,12 +182,15 @@ if (!isset($_SESSION["login"])) {
                                         <li class="nav-item">
                                             <a class="nav-link" href="halaman_kirim_email.php">Kirim E-mail (Akun)</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="izin_admin.php">Input Data (Izin)</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
                          
                             <li class="nav-item ">
-                                <a class="nav-link " href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Kehadiran</a>
+                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-4" aria-controls="submenu-4"><i class="fab fa-fw fa-wpforms"></i>Kehadiran</a>
                                 <div id="submenu-4" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
@@ -210,14 +199,11 @@ if (!isset($_SESSION["login"])) {
                                         <li class="nav-item">
                                             <a class="nav-link" href="daftar_tidak_hadir_mahasiswa.php">Daftar Tidak Hadir</a>
                                         </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="izin_admin.php">Input Data (Izin)</a>
-                                        </li>
                                     </ul>
                                 </div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Laporan</a>
+                                <a class="nav-link" href="#" data-toggle="collapse" aria-expanded="false" data-target="#submenu-5" aria-controls="submenu-5"><i class="fas fa-fw fa-table"></i>Laporan</a>
                                 <div id="submenu-5" class="collapse submenu" style="">
                                     <ul class="nav flex-column">
                                         <li class="nav-item">
@@ -267,7 +253,7 @@ if (!isset($_SESSION["login"])) {
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
                                         <ol class="breadcrumb">
-                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Laporan</a></li>
+                                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Dashboard</a></li>
                                             <li class="breadcrumb-item active" aria-current="page">Sistem Informasi Absensi Mahasiswa PKL (Magang)</li>
                                         </ol>
                                     </nav>
@@ -277,48 +263,47 @@ if (!isset($_SESSION["login"])) {
                     </div>
                 
                     <div class="ecommerce-widget">
-                    <?php 
- 
-                        if(isset($_GET['tanggal'])){
-                        $tgl = $_GET['tanggal'];
-                        $sql = mysqli_query($conn,"select * from tb_kehadiran where tanggal='$tgl'");
-                        }else{
-                        $sql = mysqli_query($conn,"select * from tb_kehadiran order by tanggal desc  ");
-                        }   
-                        $sil    = mysqli_fetch_assoc($sql);
-
-                        ?>
 
                     <div class="row">
                         <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                       <div class="col-xl-12 text-center">
-                                             <h2>Laporan Absensi Harian</h2>                        
-                                       </div>
-                                        <div class="row justify-content-center mt-2 text-center">
-                                            <div class="col-6  mt-1">
-                                            <form method="get">
-                                                <div class="input-group date" data-provide="datepicker" autocomplete=off>
-                                                    <input  type="text" id="date" name ="tanggal" placeholder="Tanggal" class="form-control" autocomplete= "off" style ="margin-bottom:5px"  >
-                                                    <input type="submit" class="btn btn-warning" style ="margin-left:5px;margin-bottom:5px" value="FILTER">
-                                                    <a class="btn btn-light ml-1" href="export_get_admin.php?tanggal=<?= $tgl ?>" role="button" style ="margin-bottom:5px">Cetak</a>
-                                                </div>
-                                                <!-- <div class="dropdown-center mt-2 ">
-                                                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Nama Mahasiswa
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                     <?php foreach ($bidang as $row) : ?>
-                                                        <li><a class="dropdown-item" href="#"><?php echo $row['nama_bidang'];?></a></li>
-                                                    <?php endforeach; ?>
-                                                    </ul>
-                                                </div> -->
-                                                </form>
-                                                <div class="input-group-addon">
-                                                   <span class="glyphicon glyphicon-th"></span>
-                                                </div>
-                                            </div>                 
+                                 <?php
+                                        if(isset ($_POST["submit"])) {
+
+                                            if (izin($_POST) > 0) {
+                                            echo "<script>alert('Data Berhasil di Tambah!');window.location='izin_admin.php'</script>";
+                                            }  else {
+                                            echo "<script>alert('Data Gagal di Tambah!');window.location='izin_admin.php''</script>";
+                                            }
+                                            
+                                        }
+
+                                 ?>
+                                        <div class="col-xl-12 text-left">
+                                            <form action="" method="post">
+                                            <div class="mb-3">
+                                                        <label class="form-label">Nama Lengkap</label>
+                                                        <input type="text" class="form-control" name="nama" >
+                                                    </div>
+                                    
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Nomor Induk Mahasiswa</label>
+                                                        <input type="text" class="form-control" name="nobp" >
+                                                    </div>
+                            
+                                                    <div class="mb-3">
+                                                            <label class="form-label" >Keterangan</label>
+                                                            <select class="form-select" aria-label="Default select example" name="status" style="padding:7px; border-color:#ced4da; color:grey">
+                                                                <option ></option>
+                                                                <option value="">======Pilih Alasan======</option>                                    
+                                                                <option value="Sakit">Sakit</option>                                    
+                                                                <option value="Izin">Izin</option>                              
+                                                                <option value="Lainnya">Lainnya</option>                        
+                                                           </select>   
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary" name="submit">Input Keterangan</button>
+                                             </form>
                                         </div>
                                     </div>
                                 </div>
@@ -326,46 +311,8 @@ if (!isset($_SESSION["login"])) {
                     </div>
 
     
-                    <input type="text" id="idKehadiran" value="<?=$PresensiID?>" hidden>
                     <div class="row">
-                        <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                    <div class="table-responsive">
-
-                                    <table class="table">
-                              <thead>
-                                <tr>
-                                  <th scope="col">No</th>
-                                  <th scope="col">Nama</th>
-                                  <th scope="col">Tanggal</th>
-                                  <th scope="col">Jam Masuk</th>
-                                  <th scope="col">Jam Keluar</th>
-                                  <th scope="col">Keterangan</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-
-                         
-
-                                <?php foreach ($sql as $sil) :
-                                ?>
-                                <tr>
-                                  <td>1</td>
-                                  <td><?php echo $sil['nama'] ?></td>
-                                  <td><?php echo $sil['tanggal'] ?></td>
-                                  <td><?php echo $sil['jam_masuk'] ?></td>
-                                  <td><?php echo $sil['jam_keluar'] ?></td>
-                                  <td><?php echo $sil['status']; ?></td>
-                                </tr>
-                                <?php endforeach; ?> 
-
-                              </tbody>
-                            </table>
-                                </div>
-                                    </div>
-                                </div>
-                        </div>
+                 
                   
                     </div>
 
@@ -407,19 +354,10 @@ if (!isset($_SESSION["login"])) {
     <script src="assets/vendor/slimscroll/jquery.slimscroll.js"></script>
     <script src="assets/libs/js/main-js.js"></script>
     <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    <script src="js/bootstrap-datepicker.js"></script>
-
-
-    <script>
-        $( function() {
-        $( "#date" ).datepicker({
-            format: "yyyy-mm-dd"
-        });
-        } );
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
     
-
+   
 </body>
  
 </html>

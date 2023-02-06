@@ -24,6 +24,14 @@ if (!isset($_SESSION["login"])) {
   $rowss    = mysqli_fetch_assoc($resuld);
   $numRowss = mysqli_num_rows($resuld);
 
+  $resuldd = mysqli_query($conn, "SELECT * FROM tb_kehadiran WHERE tanggal = '$tgl' and status ='Sakit' ");
+  $rowsss    = mysqli_fetch_assoc($resuldd);
+  $numRowsss = mysqli_num_rows($resuldd);
+
+
+    $mahasiswa = mysqli_query($conn,"SELECT *FROM tb_mahasiswa ");
+    $data = mysqli_fetch_assoc($mahasiswa);
+
 
 
 ?>
@@ -209,6 +217,9 @@ if (!isset($_SESSION["login"])) {
                                         <li class="nav-item">
                                             <a class="nav-link" href="daftar_tidak_hadir_mahasiswa.php">Daftar Tidak Hadir</a>
                                         </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="izin_admin.php">Input Data (Izin)</a>
+                                        </li>
                                     </ul>
                                 </div>
                             </li>
@@ -275,10 +286,48 @@ if (!isset($_SESSION["login"])) {
                     <div class="ecommerce-widget">
 
                     <div class="row">
-                        <div class="col-xl-8 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
-                                    <img src="img/pages.png" alt="Logo" width = "100%" class="d-inline-block align-text-top" style ="margin=2px">
+                                    <!-- <img src="img/pages.png" alt="Logo" width = "100%" class="d-inline-block align-text-top" style ="margin=2px"> -->
+                                    <div class="table-responsive">
+
+                                        <table class="table">
+                                            <thead>
+                                                <tr>
+                                                <th scope="col"></th>
+                                                <th scope="col">Nama</th>
+                                                <th scope="col">NIM</th>
+                                                <th scope="col">Jurusan</th>
+                                                <th scope="col">Universitas</th>
+                                                <th scope="col">Sub Bidang</th>
+                                                <th scope="col">Masuk</th>
+                                                <th scope="col">Keluar</th>
+                                                <th scope="col">Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            
+
+                                                <?php foreach ($mahasiswa as $data) :
+                                                ?>
+                                                <tr>
+                                                <td></td>
+                                                <td><?php echo $data['nama'] ?></td>
+                                                <td><?php echo $data['nobp'] ?></td>
+                                                <td><?php echo $data['jurusan'] ?></td>
+                                                <td><?php echo $data['universitas'] ?></td>
+                                                <td><?php echo $data['id_subbidang'] ?></td>
+                                                <td><?php echo $data['tanggalmasuk'] ?></td>
+                                                <td><?php echo $data['tanggalkeluar']; ?></td>
+                                                <td><button type="button" class="btn btn-success btn-sm">Sedang PKL</button></td>
+                                                </tr>
+                                                <?php endforeach; ?> 
+
+                                            </tbody>
+                                        </table>
+                                        </div>
                                     </div>
                                 </div>
                         </div>
@@ -321,7 +370,19 @@ if (!isset($_SESSION["login"])) {
                                         </div>
                                     </div>
                                 </div>
-                            </div>                        
+                            </div>         
+                            <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12">
+                                <div class="card">
+                                <div class="card-body">
+                                        <h5 class="text-muted">Izin / Sakit</h5>
+                                        <div class="metric-value d-inline-block">
+                                            <h1 class="mb-1"><?php echo $numRowsss ?></h1>
+                                        </div>
+                                        <div class="metric-label d-inline-block float-right text-success font-weight-bold">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                   
                         </div>  
                     </div>
                 </div>
