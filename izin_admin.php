@@ -248,7 +248,7 @@ require 'conn.php';
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h2 class="pageheader-title">Halo <?php echo $row['nama']; ?>, Silahkan Isi Presensi! </h2>
+                                <h2 class="pageheader-title">Halo <?php echo $row['nama']; ?>! </h2>
                                 <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">

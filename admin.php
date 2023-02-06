@@ -24,13 +24,15 @@ if (!isset($_SESSION["login"])) {
   $rowss    = mysqli_fetch_assoc($resuld);
   $numRowss = mysqli_num_rows($resuld);
 
-  $resuldd = mysqli_query($conn, "SELECT * FROM tb_kehadiran WHERE tanggal = '$tgl' and status ='Sakit' ");
+  $resuldd = mysqli_query($conn, "SELECT * FROM tb_kehadiran WHERE tanggal = '$tgl' and (status ='Sakit' or status ='Izin') ");
   $rowsss    = mysqli_fetch_assoc($resuldd);
   $numRowsss = mysqli_num_rows($resuldd);
 
+  $mahasiswa = mysqli_query($conn,"SELECT * FROM tb_mahasiswa ");
+  $data = mysqli_fetch_assoc($mahasiswa);
 
-    $mahasiswa = mysqli_query($conn,"SELECT *FROM tb_mahasiswa ");
-    $data = mysqli_fetch_assoc($mahasiswa);
+   
+
 
 
 
@@ -289,9 +291,9 @@ if (!isset($_SESSION["login"])) {
                         <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
                                 <div class="card">
                                     <div class="card-body">
+                                    <h5 class="text-muted">Daftar Mahasiswa PKL</h5>
                                     <!-- <img src="img/pages.png" alt="Logo" width = "100%" class="d-inline-block align-text-top" style ="margin=2px"> -->
                                     <div class="table-responsive">
-
                                         <table class="table">
                                             <thead>
                                                 <tr>
@@ -303,13 +305,11 @@ if (!isset($_SESSION["login"])) {
                                                 <th scope="col">Sub Bidang</th>
                                                 <th scope="col">Masuk</th>
                                                 <th scope="col">Keluar</th>
+                                                <th scope="col">Surat</th>
                                                 <th scope="col">Status</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-
-                                            
-
+                                            <tbody> 
                                                 <?php foreach ($mahasiswa as $data) :
                                                 ?>
                                                 <tr>
@@ -321,9 +321,15 @@ if (!isset($_SESSION["login"])) {
                                                 <td><?php echo $data['id_subbidang'] ?></td>
                                                 <td><?php echo $data['tanggalmasuk'] ?></td>
                                                 <td><?php echo $data['tanggalkeluar']; ?></td>
+                                                <td><a style = "color:blue" href="download.php?surat_pernyataan=<?=$data['surat_pernyataan']?>"><u>Download<u></a></td>
+                                                <?php if ( substr($data['tanggalkeluar'],6,2) >= substr($tgl,6,2)) : ?>
                                                 <td><button type="button" class="btn btn-success btn-sm">Sedang PKL</button></td>
+                                                <?php else : ?>
+                                                <td><button type="button" class="btn btn-danger btn-sm">Selesai PKL</button></td>
+                                                <?php endif; ?>
                                                 </tr>
                                                 <?php endforeach; ?> 
+
 
                                             </tbody>
                                         </table>

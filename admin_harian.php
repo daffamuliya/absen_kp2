@@ -16,6 +16,10 @@ if (!isset($_SESSION["login"])) {
   $tgl1 = date('l jS \of F Y');
   $results = mysqli_query($conn, "SELECT * FROM tb_kehadiran WHERE nobp = '$id' and tanggal = '$tgl' ");
   $rows    = mysqli_fetch_assoc($results);
+
+  $combobox =  mysqli_query($conn, "SELECT * FROM tb_mahasiswa");
+  $combo    = mysqli_fetch_assoc($combobox);
+  
   
 
 
@@ -262,7 +266,7 @@ if (!isset($_SESSION["login"])) {
                     <div class="row">
                         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                             <div class="page-header">
-                                <h2 class="pageheader-title">Halo <?php echo $row['nama']; ?>, Silahkan Isi Presensi! </h2>
+                                <h2 class="pageheader-title">Halo <?php echo $row['nama']; ?>! </h2>
                                 <p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
                                 <div class="page-breadcrumb">
                                     <nav aria-label="breadcrumb">
@@ -279,15 +283,43 @@ if (!isset($_SESSION["login"])) {
                     <div class="ecommerce-widget">
                     <?php 
  
-                        if(isset($_GET['tanggal'])){
-                        $tgl = $_GET['tanggal'];
-                        $sql = mysqli_query($conn,"select * from tb_kehadiran where tanggal='$tgl'");
-                        }else{
-                        $sql = mysqli_query($conn,"select * from tb_kehadiran order by tanggal desc  ");
-                        }   
-                        $sil    = mysqli_fetch_assoc($sql);
+                                        
+                        if(count($_GET)!= 0){
+                            $tgl = $_GET['tanggal'];
+                            $sql = "select * from tb_kehadiran ";
+                            $arrayGet = [];
+                            if(isset($_GET['tanggal'])&&$_GET['tanggal']!=""){
+                                $arrayGet['tanggal']=$_GET['tanggal'];
+                            }
+                            if(isset($_GET['nobp'])&&$_GET['nobp']!=""){
+                                $arrayGet['nobp']=$_GET['nobp'];
+                            }
+                            $keyArray = array_keys($arrayGet);
+                            for($z=0; $z<count($arrayGet); $z++){
+                                if($z==0){
+                                    $prefix = "where";
+                                }else{
+                                    $prefix = "and";
+                                }
+                                $key = $keyArray[$z];
+                                $val = $arrayGet[$key];
+                                if($key=='tanggal'){
+                                    if ($val != "") {
+                                     $sql .= " $prefix tanggal ='$tgl'";
+                                    }
+                                }else if($key=='nobp'){
+                                    if ($val != "") {
+                                        $sql .= " $prefix $key='$val'";
+                                    } 
+                                } 
+                            }
+                       }else{
+                            $sql = "select * from tb_kehadiran ";
+                       }  
+                       $sql1 = mysqli_query($conn,$sql);
+                       $sil = mysqli_fetch_assoc($sql1);
+                    ?>
 
-                        ?>
 
                     <div class="row">
                         <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
@@ -304,16 +336,12 @@ if (!isset($_SESSION["login"])) {
                                                     <input type="submit" class="btn btn-warning" style ="margin-left:5px;margin-bottom:5px" value="FILTER">
                                                     <a class="btn btn-light ml-1" href="export_get_admin.php?tanggal=<?= $tgl ?>" role="button" style ="margin-bottom:5px">Cetak</a>
                                                 </div>
-                                                <!-- <div class="dropdown-center mt-2 ">
-                                                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                        Nama Mahasiswa
-                                                    </button>
-                                                    <ul class="dropdown-menu">
-                                                     <?php foreach ($bidang as $row) : ?>
-                                                        <li><a class="dropdown-item" href="#"><?php echo $row['nama_bidang'];?></a></li>
-                                                    <?php endforeach; ?>
-                                                    </ul>
-                                                </div> -->
+                                                <select class="input100 border-0" placeholder="Nama Mahasiswa" aria-label="" name="nobp" style="color:grey; margin-top:15px; " id="id_subbidang">
+                                                       <option selected value="">Nama Mahasiswa</option>
+                                                       <?php foreach ($combobox as $combo) : ?>
+                                                       <option value="<?php echo $combo['nobp']; ?>"><?php echo $combo['nama']; ?></option>
+                                                       <?php endforeach; ?>
+                                                </select>
                                                 </form>
                                                 <div class="input-group-addon">
                                                    <span class="glyphicon glyphicon-th"></span>
@@ -336,7 +364,7 @@ if (!isset($_SESSION["login"])) {
                                     <table class="table">
                               <thead>
                                 <tr>
-                                  <th scope="col">No</th>
+                                  <th scope="col"></th>
                                   <th scope="col">Nama</th>
                                   <th scope="col">Tanggal</th>
                                   <th scope="col">Jam Masuk</th>
@@ -348,10 +376,10 @@ if (!isset($_SESSION["login"])) {
 
                          
 
-                                <?php foreach ($sql as $sil) :
+                                <?php foreach ($sql1 as $sil) :
                                 ?>
                                 <tr>
-                                  <td>1</td>
+                                  <td></td>
                                   <td><?php echo $sil['nama'] ?></td>
                                   <td><?php echo $sil['tanggal'] ?></td>
                                   <td><?php echo $sil['jam_masuk'] ?></td>
