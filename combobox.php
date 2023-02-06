@@ -3,7 +3,7 @@ include "conn.php";
 if (isset($_POST['id_bidang'])) {
     $bidang = $_POST["id_bidang"];
 
-    $sql = "select * from tb_subbidang where id_bidang=$bidang";
+    $sql = "select * from tb_subbidang where id_bidang=$bidang ";
 
     $hasil = mysqli_query($conn, $sql);
     $no = 0;

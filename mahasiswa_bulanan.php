@@ -282,7 +282,7 @@ if (!isset($_SESSION["login"])) {
                                     <table class="table">
                               <thead>
                                 <tr>
-                                  <th scope="col">No</th>
+                                  <th scope="col"></th>
                                   <th scope="col">Tanggal</th>
                                   <th scope="col">Jam Masuk</th>
                                   <th scope="col">Jam Keluar</th>
@@ -306,7 +306,7 @@ if (!isset($_SESSION["login"])) {
                                 <?php foreach ($sql as $sil) :
                                 ?>
                                 <tr>
-                                  <td>1</td>
+                                  <td></td>
                                   <td><?php echo $sil['tanggal'] ?></td>
                                   <td><?php echo $sil['jam_masuk'] ?></td>
                                   <td><?php echo $sil['jam_keluar'] ?></td>

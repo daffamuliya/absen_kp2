@@ -16,6 +16,9 @@ if (!isset($_SESSION["login"])) {
   $tgl1 = date('l jS \of F Y');
   $results = mysqli_query($conn, "SELECT * FROM tb_kehadiran WHERE nobp = '$id' and tanggal = '$tgl' ");
   $rows    = mysqli_fetch_assoc($results);
+
+  $combobox =  mysqli_query($conn, "SELECT * FROM tb_mahasiswa");
+  $combo    = mysqli_fetch_assoc($combobox);
   
 
  
@@ -45,6 +48,9 @@ if (!isset($_SESSION["login"])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <title>Absensi</title>
 
 </head>
@@ -273,14 +279,41 @@ if (!isset($_SESSION["login"])) {
                 
                     <div class="ecommerce-widget">
                     <?php  
-                                    if(isset($_GET['month'])){
-                                    $bulan = $_GET['month'];
-                                    $sql = mysqli_query($conn,"select * from tb_kehadiran where substr(tanggal,1,7) ='$bulan'");
-                                    }else{
-                                    $sql = mysqli_query($conn,"select * from tb_kehadiran order by tanggal desc  ");
-                                    }   
-                                    $sil = mysqli_fetch_assoc($sql);
-                                   
+                                              
+                                    if(count($_GET)!= 0){
+                                        $bulan = $_GET['month'];
+                                        $sql = "select * from tb_kehadiran ";
+                                        $arrayGet = [];
+                                        if(isset($_GET['month'])&&$_GET['month']!=""){
+                                            $arrayGet['month']=$_GET['month'];
+                                        }
+                                        if(isset($_GET['nobp'])&&$_GET['nobp']!=""){
+                                            $arrayGet['nobp']=$_GET['nobp'];
+                                        }
+                                        $keyArray = array_keys($arrayGet);
+                                        for($z=0; $z<count($arrayGet); $z++){
+                                            if($z==0){
+                                                $prefix = "where";
+                                            }else{
+                                                $prefix = "and";
+                                            }
+                                            $key = $keyArray[$z];
+                                            $val = $arrayGet[$key];
+                                            if($key=='month'){
+                                                if ($val != "") {
+                                                 $sql .= " $prefix substr(tanggal,1,7) ='$bulan'";
+                                                }
+                                            }else if($key=='nobp'){
+                                                if ($val != "") {
+                                                    $sql .= " $prefix $key='$val'";
+                                                } 
+                                            } 
+                                        }
+                                   }else{
+                                        $sql = "select * from tb_kehadiran ";
+                                   }  
+                                   $sql1 = mysqli_query($conn,$sql);
+                                   $sil = mysqli_fetch_assoc($sql1);
                                 ?>
 
                     <div class="row">
@@ -298,6 +331,12 @@ if (!isset($_SESSION["login"])) {
                                                     <input type="submit" class="btn btn-warning" style ="margin-left:5px"value="FILTER">
                                                     <a class="btn btn-light ml-1" href="export_get_admin_bulan.php?bulan=<?= $bulan ?>" role="button">Cetak</a>
                                                 </div>
+                                                <select class="input100 border-0" placeholder="Nama Mahasiswa" aria-label="" name="nobp" style="color:grey; margin-top:15px; " id="id_subbidang">
+                                                       <option selected value="">Nama Mahasiswa</option>
+                                                       <?php foreach ($combobox as $combo) : ?>
+                                                       <option value="<?php echo $combo['nobp']; ?>"><?php echo $combo['nama']; ?></option>
+                                                       <?php endforeach; ?>
+                                                </select>
                                                 </form>
                                                 <div class="input-group-addon">
                                                    <span class="glyphicon glyphicon-th"></span>
@@ -320,7 +359,7 @@ if (!isset($_SESSION["login"])) {
                                     <table class="table">
                               <thead>
                                 <tr>
-                                  <th scope="col">No</th>
+                                  <th scope="col"></th>
                                   <th scope="col">Nama</th>
                                   <th scope="col">Tanggal</th>
                                   <th scope="col">Jam Masuk</th>
@@ -332,10 +371,10 @@ if (!isset($_SESSION["login"])) {
 
                              
 
-                                <?php foreach ($sql as $sil) :
+                                <?php foreach ($sql1 as $sil) :
                                 ?>
                                 <tr>
-                                  <td>1</td>
+                                  <td></td>
                                   <td><?php echo $sil['nama'] ?></td>
                                   <td><?php echo $sil['tanggal'] ?></td>
                                   <td><?php echo $sil['jam_masuk'] ?></td>
@@ -393,13 +432,8 @@ if (!isset($_SESSION["login"])) {
     <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     <script src="js/bootstrap-datepicker.js"></script>
-    <!-- <script>
-        $( function() {
-        $( "#month" ).datepicker({
-            format: "yyyy-mm-dd"
-        });
-        } );
-    </script> -->
+    
+
     
 
 </body>
