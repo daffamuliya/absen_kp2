@@ -23,6 +23,8 @@ if (isset($_POST["login"])) {
       if ($row["level"] === "Admin") {
       header("Location: admin.php");
       exit;
+      } else if ($row["level"] === "Mahasiswa" && $row["status"] === "0" ) {
+        header("Location: setting.php");
       } else {
         header("Location: mahasiswa.php");
       }

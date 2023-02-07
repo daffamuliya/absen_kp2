@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 require 'conn.php';
 
   $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$_SESSION[username]'");
@@ -10,7 +11,7 @@ require 'conn.php';
        
    $password_lama = $_POST ["password_lama"];
    if (password_verify($password_lama, $row["password"]) && ubah($_POST) > 0) {
-        echo "<script>alert('Berhasil!');window.location='setting.php'</script>";
+        echo "<script>alert('Berhasil!');window.location='login_user.php;'</script>";
       }  else {
         echo "<script>alert('Password lama salah!');window.location='setting.php'</script>";
       }
@@ -242,9 +243,11 @@ require 'conn.php';
                     </div>
                 
                     <div class="ecommerce-widget">
+                        
 
                     <div class="row">
                         <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
+                            
                                 <div class="card">
                                     <div class="card-body">
                                        <div class="col-xl-12 text-left">
