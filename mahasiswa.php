@@ -230,12 +230,11 @@ if (!isset($_SESSION["login"])) {
                             <?php else : ?>
                             <div class = "alert alert-success" role="alert" hidden>
                                 Password anda Benar!
-                            <div>
+                            </div>
                             <?php endif; ?>
                            
 
                             
-
                         </div>
                     </div>
                 

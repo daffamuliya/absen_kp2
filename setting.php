@@ -11,7 +11,8 @@ require 'conn.php';
        
    $password_lama = $_POST ["password_lama"];
    if (password_verify($password_lama, $row["password"]) && ubah($_POST) > 0) {
-        echo "<script>alert('Berhasil!');window.location='login_user.php;'</script>";
+        echo "<script>alert('Berhasil!');window.location='login_user.php'</script>";
+        session_destroy();
       }  else {
         echo "<script>alert('Password lama salah!');window.location='setting.php'</script>";
       }
@@ -247,6 +248,16 @@ require 'conn.php';
 
                     <div class="row">
                         <div class="col-xl-12 col-lg-6 col-md-6 col-sm-12 col-12">
+                        <?php if ( $row["status"] == 0 ) : ?>
+                            <div class="alert alert-danger" role="alert">
+                                Ganti Password anda!
+                            </div>
+
+                            <?php else : ?>
+                            <div class = "alert alert-success" role="alert" >
+                                Password anda sudah verifikasi!
+                            </div>
+                            <?php endif; ?>
                             
                                 <div class="card">
                                     <div class="card-body">

@@ -283,25 +283,33 @@ require 'conn.php';
                                         <div class="col-xl-12 text-left">
                                             <form action="" method="post">
                                             <div class="mb-3">
-                                                        <label class="form-label">Nama Lengkap</label>
-                                                        <input type="text" class="form-control" name="nama" >
-                                                    </div>
+                                                            <label class="form-label" >Nama Lengkap</label>
+                                                            <select class="form-select" aria-label="Default select example" name="nama" style="padding:7px; border-color:#ced4da; color:grey"  id ="nama" data-validate="Username is required">
+                                                                <option ></option>
+                                                                <option value="">======Pilih Nama======</option> 
+                                                                <?php foreach ($combobox as $combo) : ?>                                   
+                                                                <option value="<?php echo $combo['nama']; ?>"><?php echo $combo['nama']; ?></option>                                    
+                                                                <?php endforeach; ?>                   
+                                                           </select>   
+                                            </div>
                                     
-                                                    <div class="mb-3">
-                                                        <label class="form-label">Nomor Induk Mahasiswa</label>
-                                                        <input type="text" class="form-control" name="nobp" >
-                                                    </div>
+                                            <div class="mb-3" >
+                                                            <label class="form-label" >NIM</label>
+                                                            <select class="form-select" aria-label="Default select example" name="nobp" style="padding:7px; border-color:#ced4da; color:grey"  id ="nobp" data-validate="Username is required">
+                                                                               
+                                                           </select>   
+                                            </div>
                             
-                                                    <div class="mb-3">
+                                            <div class="mb-3">
                                                             <label class="form-label" >Keterangan</label>
-                                                            <select class="form-select" aria-label="Default select example" name="status" style="padding:7px; border-color:#ced4da; color:grey">
+                                                            <select class="form-select" aria-label="Default select example" name="status" style="padding:7px; border-color:#ced4da; color:grey"  data-validate="Username is required">
                                                                 <option ></option>
                                                                 <option value="">======Pilih Alasan======</option>                                    
                                                                 <option value="Sakit">Sakit</option>                                    
                                                                 <option value="Izin">Izin</option>                              
                                                                 <option value="Lainnya">Lainnya</option>                        
                                                            </select>   
-                                                    </div>
+                                            </div>
                                                     <button type="submit" class="btn btn-primary" name="submit">Input Keterangan</button>
                                              </form>
                                         </div>
@@ -356,7 +364,27 @@ require 'conn.php';
     <script src="assets/vendor/charts/c3charts/c3.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
-    
+        
+                <script>
+
+            $("#nama").change(function(){
+                // variabel dari nilai combo box kendaraan
+                var nama = $("#nama").val();
+                //console.log(id_bidang);
+                // Menggunakan ajax untuk mengirim dan dan menerima data dari server
+                $.ajax({
+                    type: "POST",
+                    dataType: 'html',
+                    url: "combobox_nama.php",
+                    data: {nama:nama},
+                    success: function(data){
+                    $("#nobp").html(data);
+                    }
+                });
+            });
+
+
+                </script>
    
 </body>
  

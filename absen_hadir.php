@@ -317,7 +317,7 @@ if (!isset($_SESSION["login"])) {
                                   <td><?php echo $dataPresensi['tanggal'] ?></td>
                                   <td><?php echo $dataPresensi['jam_masuk'] ?></td>
                                   <td><?php echo $dataPresensi['jam_keluar'] ?></td>
-                                  <td><?php echo $dataPresensi['status']; ?></td>
+                                  <td id="status"><?php echo $dataPresensi['status']; ?></td>
                                 </tr>
                              
                               </tbody>
@@ -372,6 +372,7 @@ if (!isset($_SESSION["login"])) {
     jQuery(function($){
         var jam_masuk = $("#txtJamMasuk").text();
         var jam_keluar = $("#txtJamKeluar").text();
+        var status = $("#status").text();
 
         if (jam_masuk=='00:00:01'){
             $("#btnCheckin").attr('disabled', false);
@@ -418,7 +419,10 @@ if (!isset($_SESSION["login"])) {
             });
         });
 
-        if (jam_keluar!='00:00:00'){
+        if (jam_keluar!='00:00:00' ){
+            $("#btnCheckin").attr('disabled', true);
+            $("#btnCheckOut").attr('disabled', true);
+        } else if (status =='Alfa') {
             $("#btnCheckin").attr('disabled', true);
             $("#btnCheckOut").attr('disabled', true);
         }
