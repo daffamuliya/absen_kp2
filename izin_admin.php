@@ -283,32 +283,40 @@ require 'conn.php';
                                         <div class="col-xl-12 text-left">
                                             <form action="" method="post">
                                             <div class="mb-3">
-                                                            <label class="form-label" >Nama Lengkap</label>
-                                                            <select class="form-select" aria-label="Default select example" name="nama" style="padding:7px; border-color:#ced4da; color:grey"  id ="nama" data-validate="Username is required">
-                                                                <option ></option>
+                                                <label class="form-label" >Nama Lengkap</label>    
+                                            </div>
+                                            <div class="mb-3">
+                                                <select class="form-select" aria-label="Default select example" name="nama" style="padding:7px; border-color:#ced4da; color:grey"  id ="nama" data-validate="Username is required">
+                                                <option ></option>
                                                                 <option value="">======Pilih Nama======</option> 
                                                                 <?php foreach ($combobox as $combo) : ?>                                   
                                                                 <option value="<?php echo $combo['nama']; ?>"><?php echo $combo['nama']; ?></option>                                    
-                                                                <?php endforeach; ?>                   
-                                                           </select>   
+                                                                <?php endforeach; ?>  
+                                                </select>   
                                             </div>
                                     
                                             <div class="mb-3" >
-                                                            <label class="form-label" >NIM</label>
-                                                            <select class="form-select" aria-label="Default select example" name="nobp" style="padding:7px; border-color:#ced4da; color:grey"  id ="nobp" data-validate="Username is required">
-                                                                               
-                                                           </select>   
+                                                <label class="form-label" >NIM</label>      
+                                            </div>
+
+                                            <div class="mb-3">
+                                                <select class="form-select" aria-label="Default select example" name="nobp" style="padding:7px; border-color:#ced4da; color:grey"  id ="nobp" data-validate="Username is required">
+                                                <option value="">=========NIM========</option> 
+                                                </select>   
                                             </div>
                             
                                             <div class="mb-3">
-                                                            <label class="form-label" >Keterangan</label>
-                                                            <select class="form-select" aria-label="Default select example" name="status" style="padding:7px; border-color:#ced4da; color:grey"  data-validate="Username is required">
+                                                <label class="form-label" >Keterangan</label> 
+                                            </div>
+
+                                            <div class="mb-3">
+                                            <select class="form-select" aria-label="Default select example" name="status" style="padding:7px; border-color:#ced4da; color:grey"  data-validate="Username is required">
                                                                 <option ></option>
                                                                 <option value="">======Pilih Alasan======</option>                                    
                                                                 <option value="Sakit">Sakit</option>                                    
                                                                 <option value="Izin">Izin</option>                              
                                                                 <option value="Lainnya">Lainnya</option>                        
-                                                           </select>   
+                                            </select>  
                                             </div>
                                                     <button type="submit" class="btn btn-primary" name="submit">Input Keterangan</button>
                                              </form>
