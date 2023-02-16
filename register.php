@@ -6,9 +6,9 @@ require 'conn.php';
 if(isset ($_POST["register"])) {
   
   if (tambah($_POST) > 0) {
-    echo "<script>alert('Data Berhasil di Tambah!');window.location='register.php'</script>";
+    echo "<script>alert('Berhasil Registrasi!');window.location='register.php'</script>";
   }  else {
-    echo "<script>alert('Data Gagal di Tambah!');window.location='register.php''</script>";
+    echo "<script>alert('Gagal Registrasi!');window.location='register.php''</script>";
   }
   
 
@@ -129,7 +129,7 @@ $sub_bidang = query("SELECT * FROM tb_subbidang");
               </div>
 
               <div>
-                <a href="login_user.php" class="txt1"> Sudah Login? </a>
+                <a href="login_user.php" class="txt1"> Sudah Registrasi? </a>
               </div>
             </div>
 

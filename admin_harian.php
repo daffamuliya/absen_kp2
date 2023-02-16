@@ -288,7 +288,7 @@ if (!isset($_SESSION["login"])) {
                             $tgl = $_GET['tanggal'];
                             $sql = "select * from tb_kehadiran ";
                             $arrayGet = [];
-                            if(isset($_GET['tanggal'])&&$_GET['tanggal']!=""){
+                            if(isset($_GET['tanggal'])&& $_GET['tanggal']!=""){
                                 $arrayGet['tanggal']=$_GET['tanggal'];
                             }
                             if(isset($_GET['nobp'])&&$_GET['nobp']!=""){

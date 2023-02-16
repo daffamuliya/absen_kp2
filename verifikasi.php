@@ -12,11 +12,9 @@ $password = password_hash($password,PASSWORD_DEFAULT); //Enkripsi Password denga
 $test = mysqli_query($conn, "INSERT INTO user (username,password,level,nama,status) VALUE ( '$id','$password','Mahasiswa', '$row[nama]','$status')");
 
 if($test){
-  echo "<script>alert('Berhasil Verifikasi!');window.location='verifikasi_admin.php'</script>";
-  header("Location: verifikasi_admin.php");
-  exit;
+  echo "<script>alert('Data Berhasil di Verifikasi!');window.location='verifikasi_admin.php'</script>";
 }else{
-  echo "<script>alert('Gagal!');window.location='verifikasi_admin.php'</script>";
+  echo "<script>alert('Gagal di Verifikasi!');window.location='verifikasi_admin.php'</script>";
 }
 
 ?>

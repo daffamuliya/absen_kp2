@@ -374,9 +374,9 @@ if (!isset($_SESSION["login"])) {
                                                 <td><?php echo $data['universitas'] ?></td>
                                                 <td><?php echo $data['id_subbidang'] ?></td>
                                                 <td><?php echo $data['tanggalmasuk'] ?></td>
-                                                <td><?php echo $data['tanggalkeluar']; ?></td>
+                                                <td><?php echo $data['tanggalkeluar'] ?></td>
                                                 <td><a style = "color:blue" href="download.php?surat_pernyataan=<?=$data['surat_pernyataan']?>"><u>Download<u></a></td>
-                                                <?php if (substr($data['tanggalkeluar'],6,2) >= substr($tgl,6,2) && substr($data['tanggalkeluar'],9,2) >= substr($tgl,9,2) ) : ?>
+                                                <?php if (substr($data['tanggalkeluar'],5,2) >= substr($tgl,5,2) && substr($data['tanggalkeluar'],8,2) >= substr($tgl,8,2) ) : ?>
                                                 <td><button type="button" class="btn btn-success btn-sm">Sedang PKL</button></td>
                                                 <?php else : ?>
                                                 <td><button type="button" class="btn btn-danger btn-sm">Selesai PKL</button></td>
