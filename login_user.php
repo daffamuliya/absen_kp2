@@ -63,7 +63,7 @@ if (isset($_POST["login"])) {
         <div class="wrap-login100">
           <div class="login100-form-title" style="background-image: url(img/pln_bg.png)">
             <img src="img/pln.png" alt="" width="15%" style="margin-bottom: 10px" />
-            <span class="login100-form-title-1" style="color: #29a8df"> Absensi PKL PT. PLN UIW SUMBAR </span>
+            <span class="login100-form-title-1" style="color: #29a8df"> Absensi PKL PT. PLN UID SUMBAR </span>
           </div>
 
           <form action="" method="post" class="login100-form validate-form" >
@@ -82,7 +82,7 @@ if (isset($_POST["login"])) {
             <div class="flex-sb-m w-full p-b-30">
               <div class="contact100-form-checkbox">
                 <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me" />
-                <label class="label-checkbox100" for="ckb1"> Remember me </label>
+                <a  href="download_apk.php?nama_apk=app-debug.apk">Download APK</a>
               </div>
 
               <div>

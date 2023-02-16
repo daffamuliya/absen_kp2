@@ -47,7 +47,7 @@ $sub_bidang = query("SELECT * FROM tb_subbidang");
         <div class="wrap-login100">
           <div class="login100-form-title" style="background-image: url(img/pln_bg.png)">
             <img src="img/pln.png" alt="" width="15%" style="margin-bottom: 10px" />
-            <span class="login100-form-title-1" style="color: #29a8df"> Registrasi  PKL </br> PT. PLN UIW SUMBAR </span>
+            <span class="login100-form-title-1" style="color: #29a8df"> Registrasi  PKL </br> PT. PLN UID SUMBAR </span>
           </div>
 
           <form action="" method="post" class="login100-form validate-form" enctype="multipart/form-data">

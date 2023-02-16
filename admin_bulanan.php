@@ -304,7 +304,7 @@ if (!isset($_SESSION["login"])) {
                                             $val = $arrayGet[$key];
                                             if($key=='month'){
                                                 if ($val != "") {
-                                                 $sql .= " $prefix substr(tanggal,1,7) ='$bulan' order by ";
+                                                 $sql .= " $prefix substr(tanggal,1,7) ='$bulan'  ";
                                                 }
                                             }else if($key=='nobp'){
                                                 if ($val != "") {

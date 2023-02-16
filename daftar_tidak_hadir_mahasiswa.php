@@ -2,6 +2,7 @@
 session_start();
 
 require 'conn.php';
+date_default_timezone_set('Asia/Jakarta');
 if (!isset($_SESSION["login"])) {
   header("Location: login_user.php");
   exit;
@@ -13,7 +14,7 @@ if (!isset($_SESSION["login"])) {
   $tgl1 = date('l jS \of F Y');
 
 
-  $results = mysqli_query($conn, "SELECT * FROM tb_kehadiran where tanggal = '$tgl' and status='Alfa' ");
+  $results = mysqli_query($conn, "SELECT * FROM tb_kehadiran where tanggal = '$tgl' and status != 'Hadir'  ");
   $rows    = mysqli_fetch_assoc($results);
 
  

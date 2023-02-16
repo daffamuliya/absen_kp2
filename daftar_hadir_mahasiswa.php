@@ -2,6 +2,7 @@
 session_start();
 
 require 'conn.php';
+date_default_timezone_set('Asia/Jakarta');
 if (!isset($_SESSION["login"])) {
   header("Location: login_user.php");
   exit;
