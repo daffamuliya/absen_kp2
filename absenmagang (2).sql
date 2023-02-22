@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2023 at 02:29 AM
+-- Generation Time: Feb 22, 2023 at 07:54 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -41,7 +41,7 @@ INSERT INTO `tb_bidang` (`id_bidang`, `nama_bidang`) VALUES
 ('2', 'Distribusi'),
 ('3', 'Niaga dan Manajemen Pelanggan'),
 ('4', 'Keuangan, Komunikasi dan Umum'),
-('5', 'STI');
+('5', 'Pusat');
 
 -- --------------------------------------------------------
 
@@ -92,7 +92,32 @@ INSERT INTO `tb_kehadiran` (`id`, `nobp`, `nama`, `jam_masuk`, `jam_keluar`, `ta
 (213, '2011627289', 'Salman Gusnedi ', '00:00:00', '00:00:00', '2023-02-01', 'Alfa'),
 (214, '2011521001', 'Farhan Rizki Ghifara', '00:00:00', '00:00:00', '2023-02-01', 'Alfa'),
 (215, '2011627287', 'Udin Syaifullah ', '00:00:00', '00:00:00', '2023-02-01', 'Alfa'),
-(216, '2011627285', 'Abid Arrahman ', '00:00:00', '00:00:00', '2023-02-01', 'Alfa');
+(216, '2011627285', 'Abid Arrahman ', '00:00:00', '00:00:00', '2023-02-01', 'Alfa'),
+(219, '2011527002', 'Daffa Riza Muliya', '09:05:59', '09:06:13', '2023-02-02', 'Hadir'),
+(220, '2011527001', 'Delicia Syifa Maghfira', '00:00:00', '00:00:00', '2023-02-02', 'Alfa'),
+(221, '2011627289', 'Salman Gusnedi ', '00:00:00', '00:00:00', '2023-02-02', 'Alfa'),
+(222, '2011521001', 'Farhan Rizki Ghifara', '00:00:00', '00:00:00', '2023-02-02', 'Alfa'),
+(223, '2011627287', 'Udin Syaifullah ', '00:00:00', '00:00:00', '2023-02-02', 'Alfa'),
+(224, '2011627285', 'Abid Arrahman ', '00:00:00', '00:00:00', '2023-02-02', 'Alfa'),
+(225, '2011527002', 'Daffa Riza Muliya', '08:06:59', '00:00:00', '2023-02-06', 'Hadir'),
+(226, '2011527001', 'Delicia Syifa Maghfira', '00:00:00', '00:00:00', '2023-02-06', 'Alfa'),
+(227, '2011627289', 'Salman Gusnedi ', '00:00:00', '00:00:00', '2023-02-06', 'Alfa'),
+(228, '2011521001', 'Farhan Rizki Ghifara', '00:00:00', '00:00:00', '2023-02-06', 'Alfa'),
+(229, '2011627287', 'Udin Syaifullah ', '00:00:00', '00:00:00', '2023-02-06', 'Alfa'),
+(230, '2011627285', 'Abid Arrahman ', '00:00:00', '00:00:00', '2023-02-06', 'Alfa'),
+(232, '2011527002', 'Daffa Riza Muliya', '00:00:00', '00:00:00', '2023-02-07', 'Sakit'),
+(233, '2011527001', 'Daffa Riza Muliya', '00:00:00', '00:00:00', '2023-02-07', 'Izin'),
+(234, '2011627289', 'Salman Gusnedi ', '09:04:07', '00:00:00', '2023-02-07', 'Hadir'),
+(235, '2011521001', 'Farhan Rizki Ghifara', '00:00:00', '00:00:00', '2023-02-07', 'Alfa'),
+(237, '2011627285', 'Abid Arrahman ', '00:00:00', '00:00:00', '2023-02-07', 'Alfa'),
+(238, '2000000000', 'Malaman Sambari', '00:00:00', '00:00:00', '2023-02-07', 'Alfa'),
+(239, '2011627287', 'Udin Syaifullah ', '09:46:32', '09:47:29', '2023-02-07', 'Hadir'),
+(244, '2011527003', 'Husnil Kamil', '00:56:57', '00:00:00', '2023-02-17', 'Hadir'),
+(245, '2011527009', 'Bababa Racun', '00:00:00', '00:00:00', '2023-02-17', 'Sakit'),
+(246, '2011521001', 'Farhan Rizki Ghifara', '00:00:00', '00:00:00', '2023-02-17', 'Sakit'),
+(247, '2011527002', 'Daffa Riza Muliya', '00:00:00', '00:00:00', '2023-02-17', 'Lainnya'),
+(248, '2011521003', 'Udin', '15:27:47', '00:00:00', '2023-02-17', 'Hadir'),
+(249, '2011527001', 'Delicia Syifa Maghfira', '00:00:00', '00:00:00', '2023-02-17', 'Sakit');
 
 -- --------------------------------------------------------
 
@@ -119,12 +144,15 @@ CREATE TABLE `tb_mahasiswa` (
 --
 
 INSERT INTO `tb_mahasiswa` (`nobp`, `nama`, `email`, `surat_pernyataan`, `universitas`, `jurusan`, `id_bidang`, `id_subbidang`, `tanggalmasuk`, `tanggalkeluar`, `lamapkl`) VALUES
-('2011521001', 'Farhan Rizki Ghifara', 'farhan@gmail.com', 'Pedoman Hibah PKM Internal Terintegrasi MBKM Unand 2023 (1).pdf', 'Universitas Andalas', 'Akutansi', '4', 'Akutansi', '1 Januari', '1 Januari', '90 Hari '),
-('2011527001', 'Delicia Syifa Maghfira', 'deliciasyifamaghfira@gmail.com', 'Integrasi PKM ke MBKM_edit.pdf', 'Universitas Andalas', 'Sistem Informasi', '5', 'Sistem Teknologi dan Informasi\r\n', '1 Januari', '1 Januari', '60 Hari'),
-('2011527002', 'Daffa Riza Muliya', 'daffamuliya15@gmail.com', 'Pedoman Hibah PKM Internal Terintegrasi MBKM Unand 2023.pdf', 'Universitas Andalas', 'Sistem Informasi', '5', 'Sistem Teknologi dan Informasi\r\n', '1 Januari', '1 Januari', '90 Hari '),
-('2011627285', 'Abid Arrahman ', 'abid_nurabid@gmail.com', '4.-PKM-K.pdf', 'Politeknik Negeri Padang ', 'Teknologi Informasi', '5', 'Sistem Teknologi dan Informasi\r\n', '12 Januari ', '12 Maret', '60 Hari'),
-('2011627287', 'Udin Syaifullah ', 'udinsamsudin@gmail.com', 'Pengumuman pembagian kelas PIMNAS.. (1).pdf', 'Universitas Andalas', 'Teknik Elektro', '4', 'Komunikasi dan TJSL', '1 Januari', '30 Maret', '60 Hari '),
-('2011627289', 'Salman Gusnedi ', 'salma_alfarizy@gmail.com', 'PO HIPMI 2019 - 2022.pdf', 'Universitas Andalas', 'Gigi', '2', 'Pembangkitan', '1 Januari', '1 Januari', '60 Hari ');
+('2011521001', 'Farhan Rizki Ghifara', 'farhan@gmail.com', 'Pedoman Hibah PKM Internal Terintegrasi MBKM Unand 2023 (1).pdf', 'Universitas Andalas', 'Akutansi', '4', 'Akutansi', '2023-02-10', '2023-01-01', '90 Hari '),
+('2011521003', 'Udin', 'udin@gmail.com', 'Silaturrahmi Pimpinan Kemahasiswaan dengan UKM.pdf', 'Universitas Andalas', 'Sistem Informasi', '5', 'Sistem Teknologi dan Informasi\r\n', '2023-02-17', '2023-04-16', '60 Hari '),
+('2011527001', 'Delicia Syifa Maghfira', 'deliciasyifamaghfira@gmail.com', 'Integrasi PKM ke MBKM_edit.pdf', 'Universitas Andalas', 'Sistem Informasi', '5', 'Sistem Teknologi dan Informasi\r\n', '2023-02-10', '2023-02-08', '60 Hari'),
+('2011527002', 'Daffa Riza Muliya', 'daffamuliya15@gmail.com', 'Pedoman Hibah PKM Internal Terintegrasi MBKM Unand 2023.pdf', 'Universitas Andalas', 'Sistem Informasi', '5', 'Sistem Teknologi dan Informasi\r\n', '2023-02-10', '2023-02-01', '90 Hari '),
+('2011527003', 'Husnil Kamil', 'husnilk@gmail.com', '088 - Surat Undangan HIPMI PT UNAND.pdf', 'Universitas Andalas', 'Sistem Informasi', '5', 'Sistem Teknologi dan Informasi\r\n', '2023-02-17', '2023-04-28', '90 Hari '),
+('2011527009', 'Bababa Racun', 'babaracun@gmail.com', 'bidang 2 (pengembangan talenta).pdf', 'Universitas Andalas', 'Akutansi', '1', 'Perencanaan Sistem Kelistrikan', '2023-02-17', '2023-03-25', '60 Hari'),
+('2011627285', 'Abid Arrahman ', 'abid_nurabid@gmail.com', '4.-PKM-K.pdf', 'Politeknik Negeri Padang ', 'Teknologi Informasi', '5', 'Sistem Teknologi dan Informasi\r\n', '2023-02-10', '2023-02-01', '60 Hari'),
+('2011627287', 'Udin Syaifullah ', 'udinsamsudin@gmail.com', 'Pengumuman pembagian kelas PIMNAS.. (1).pdf', 'Universitas Andalas', 'Teknik Elektro', '4', 'Komunikasi dan TJSL', '2023-02-10', '2023-02-01', '60 Hari '),
+('2011627289', 'Salman Gusnedi ', 'salma_alfarizy@gmail.com', 'PO HIPMI 2019 - 2022.pdf', 'Universitas Andalas', 'Gigi', '2', 'Pembangkitan', '2023-02-10', '2023-02-01', '60 Hari ');
 
 -- --------------------------------------------------------
 
@@ -162,7 +190,10 @@ INSERT INTO `tb_subbidang` (`id_subbidang`, `id_bidang`, `nama_subbidang`) VALUE
 (18, '4', 'Pelaksana Pengadaan '),
 (19, '4', 'Keselamatan, Kesehatan Kerja, Lingkungan, dan Keamanan'),
 (20, '4', 'Keselamatan, Kesehatan Kerja, dan Keamanan\r\n'),
-(21, '5', 'Sistem Teknologi dan Informasi\r\n');
+(21, '5', 'STI (Sistem Teknologi dan Informasi)\r\n'),
+(22, '5', 'HTD (Human Talent Development)'),
+(23, '5', 'YAN HC (Pelayanan Human Capital)'),
+(25, '5', 'SHK (Satuan Hukum Korporat)');
 
 -- --------------------------------------------------------
 
@@ -178,21 +209,25 @@ CREATE TABLE `user` (
   `nama` varchar(50) NOT NULL,
   `status` varchar(11) NOT NULL,
   `apiKey` text NOT NULL,
-  `path` text NOT NULL
+  `path` text NOT NULL,
+  `baseimage` longblob NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `password`, `level`, `nama`, `status`, `apiKey`, `path`) VALUES
-(2, 'admin', '$2y$10$jV9REKJlc0a4GX.PqpMth.nupzv9UShJLY022fw8hQGl9yA132dL6', 'Admin', 'Admin PLN', '', '', ''),
-(35, '2011527002', '$2y$10$r7JeoQiTKwinKisbp3e7VODjGL7jq56tvZwzGbHfMShJ7tV4qfr02', 'Mahasiswa', 'Daffa Riza Muliya', '1', '', ''),
-(36, '2011527001', '$2y$10$KNrwRWW5isfYuxrCXF947O49rlgct9JoxOvcaq5eBo3qnuOnb6esO', 'Mahasiswa', 'Delicia Syifa Maghfira', '1', '', ''),
-(37, '2011627289', '$2y$10$3AFA4e1QsrO/zSdGvPe/Z.0WQLhG5k9qa5fqtRmOPXNqTZEDOB7yK', 'Mahasiswa', 'Salman Gusnedi ', '0', '', ''),
-(38, '2011521001', '$2y$10$LjLAZpsXCoxkz/bi9FZYde6feG8ITvHOGtHaV2KRgpeABBdHxKYY.', 'Mahasiswa', 'Farhan Rizki Ghifara', '0', '', ''),
-(39, '2011627287', '$2y$10$LtAY7PJbCBYV1pBzYRZPW.rPA7Sn9zHbvusTF2YIcYuYDKcugPNCa', 'Mahasiswa', 'Udin Syaifullah ', '0', '', ''),
-(40, '2011627285', '$2y$10$0U71ve0VN0rxAN7bM9bgOekGti1ZGjQoeHd81mx4rCxpJq8RQdFjq', 'Mahasiswa', 'Abid Arrahman ', '0', '', '');
+INSERT INTO `user` (`id`, `username`, `password`, `level`, `nama`, `status`, `apiKey`, `path`, `baseimage`) VALUES
+(2, 'admin', '$2y$10$jV9REKJlc0a4GX.PqpMth.nupzv9UShJLY022fw8hQGl9yA132dL6', 'Admin', 'Admin PLN', '', '', '', ''),
+(35, '2011527002', '$2y$10$qDOyTlbaWSWGrbEEaIebXu.SJ8yq4iiWL5Q45Tl9fRLeWkFi5eyja', 'Mahasiswa', 'Daffa Riza Muliya', '1', '', '', ''),
+(36, '2011527001', '$2y$10$KNrwRWW5isfYuxrCXF947O49rlgct9JoxOvcaq5eBo3qnuOnb6esO', 'Mahasiswa', 'Delicia Syifa Maghfira', '1', '', '', ''),
+(37, '2011627289', '$2y$10$sTbTOWql3W0ie32iG/RjPe8icBt7vH5.plLU19vcvo.pKvLfURs6C', 'Mahasiswa', 'Salman Gusnedi ', '1', '', '', ''),
+(38, '2011521001', '$2y$10$LjLAZpsXCoxkz/bi9FZYde6feG8ITvHOGtHaV2KRgpeABBdHxKYY.', 'Mahasiswa', 'Farhan Rizki Ghifara', '0', '', '', ''),
+(39, '2011627287', '$2y$10$6uAehtfmYeer8B13Ni3ACOnwlaKhRsg.knRUiWXiDrfQff22/Cfia', 'Mahasiswa', 'Udin Syaifullah ', '1', '', '', ''),
+(40, '2011627285', '$2y$10$0U71ve0VN0rxAN7bM9bgOekGti1ZGjQoeHd81mx4rCxpJq8RQdFjq', 'Mahasiswa', 'Abid Arrahman ', '0', '', '', ''),
+(43, '2011527009', '$2y$10$/1h8Ow4BydsdmTchZkycS.CECHbBS5rvXaA8knpu2dJeJltWKAg4y', 'Mahasiswa', 'Bababa Racun', '1', '', '', ''),
+(44, '2011527003', '$2y$10$Deg/i8CWnEifcGRJbmhS0uxwoDdnxABkY1QVD8KBJAlgBU7GcbxSu', 'Mahasiswa', 'Husnil Kamil', '1', '', '', ''),
+(45, '2011521003', '$2y$10$9ztlfELExnF/ZRWXY/eJEOwQzKDQc5VU7zSIq.qy9L4oXm5GnONPa', 'Mahasiswa', 'Udin', '1', '', '', '');
 
 --
 -- Indexes for dumped tables
@@ -238,19 +273,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `tb_kehadiran`
 --
 ALTER TABLE `tb_kehadiran`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=217;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=250;
 
 --
 -- AUTO_INCREMENT for table `tb_subbidang`
 --
 ALTER TABLE `tb_subbidang`
-  MODIFY `id_subbidang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_subbidang` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- Constraints for dumped tables
